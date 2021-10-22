@@ -1,0 +1,121 @@
+let a_width = 1280;
+let a_height = 720;
+// let a_width = 960;
+// let a_height = 540;
+let my_canvas;
+
+function setup() {
+  my_canvas = createCanvas(a_width, a_height);
+  create_ui();
+  let_init();
+  fresh_canvas();
+  begin_day();
+  load_json();
+}
+
+function begin_day() {
+  fill(0);
+  rect(0, 0, panel_width, height);
+  cycle_init();
+  day_start = millis();
+  bit_count = 0;
+  string_index = start_index;
+  y_pos = y_top;
+  draw_char_start();
+  // console.log('begin_day dot_count', dot_count, 'bit_count', bit_count);
+}
+
+function draw() {
+  if (!json_loaded) return;
+  if (!a_run) return;
+
+  if (a_state === 'draw_bit') {
+    draw_bit();
+  } else {
+    page_pause();
+  }
+
+  draw_dots_fast();
+
+  draw_count(dot_count + '');
+
+  draw_progress();
+
+  draw_day_count();
+
+  update_ui();
+}
+
+function draw_progress() {
+  let x = -1;
+  let y = height - pix_len + 1;
+  // let nu = data_index_up - data_index_start;
+  // let de = a_data.length - data_index_start;
+  let nu = data_index_up;
+  let de = a_data.length;
+  if (a_dir === 'down') {
+    nu = a_data.length - data_index_down;
+    de = a_data.length;
+  }
+  let w = (width * nu) / de;
+  fill('white');
+  rect(x, y, w, pix_len);
+  x = 0;
+  let r2 = pix_len / 2;
+  for (let i = 0; i < load_count - 1; i++) {
+    circle(x + r2, y + r2, r2);
+    x += pix_len;
+  }
+  fill(0);
+}
+
+function draw_day_count() {
+  // str = 'day ' + data_index + '/' + a_data.length + ' ';
+  str = data_index + '/' + a_data.length;
+  // console.log('draw_day_count ', str);
+  let th = pix_len;
+  textSize(th);
+  // let th = textAscent() + textDescent() + textLeading();
+  // th = pix_len * 1.5;
+  let tw = textWidth(str);
+  let x = width - tw - 1;
+  let y = height - 1;
+  fill(0);
+  rect(x, y - th, tw, th);
+  fill('white');
+  text(str, x, y);
+}
+
+function draw_count(str) {
+  // let x = x_margin + (char_len * (nchars_wide - str.length)) / 2;
+  let boxwidth = char_len * 5;
+  let x = panel_right - x_margin - boxwidth;
+  let y = y_margin;
+  fill('black');
+  rect(x, y, boxwidth, char_len);
+  // x = panel_right - x_margin - char_len * str.length;
+  x = panel_right - char_len * str.length;
+  for (let ch of str) {
+    draw_char(x, y, ch);
+    x += char_len;
+  }
+}
+
+function draw_char(x0, y0, ch) {
+  let bytes = font8x8_dict[ch];
+  for (let y1 = 0; y1 < 8; y1++) {
+    let byte = bytes[y1];
+    for (x1 = 0; x1 < 8; x1++) {
+      if (byte & (1 << x1)) {
+        // fill('gray');
+        fill_dot_color();
+        let x = x0 + x1 * pix_len;
+        let y = y0 + y1 * pix_len;
+        rect(x, y, pix_len, pix_len);
+      }
+    }
+  }
+}
+
+// https://github.com/EP-Visual-Design/COVID-19-parsed-data/blob/main/c_data/world/c_series/United_States.json
+// https://raw.githubusercontent.com/EP-Visual-Design/COVID-19-parsed-data/main/c_data/world/c_series/United_States.json

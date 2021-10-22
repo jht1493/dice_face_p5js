@@ -1,0 +1,59 @@
+notes.txt
+
+Where's my p5js.editor stuff?
+
+[] env param for user_name jht1493
+[] github pages
+
+# --
+
+# Produce listing for sketches and collections
+
+node nod/asketches_list.js
+
+node nod/acollection_list.js
+
+# download sketch + assets to mine/sketches directory
+
+curl https://editor.p5js.org/editor/projects/Bkum5s_0Z/zip -o "mine/sketches/10PRINT.zip"
+
+# --
+
+# download sketch + assets to skt directory
+
+# skt/dice video HD filter - xt90rp8XO
+
+curl https://editor.p5js.org/editor/projects/xt90rp8XO/zip -o "skt/dice video HD filter - xt90rp8XO.zip"
+
+# Create a zip file of all your sketches
+
+# Does not include upload files
+
+# Give the server a second or so to startup
+
+https://p5-project-downloader.herokuapp.com/
+https://github.com/jnsjknn/p5-project-downloader
+
+# go run locally:
+
+npm install
+npm run-script build
+npm start
+http://localhost:5000/?
+
+// https://editor.p5js.org/jht1493/sketches/xt90rp8XO
+// dice video HD filter
+
+curl https://editor.p5js.org/editor/jht1493/projects -o meta.js
+
+# re-format
+
+# get collections meta
+
+curl https://editor.p5js.org/editor/jht1493/collections -o collections.js
+curl https://editor.p5js.org/editor/jht1493/collections -o collections.json
+
+# --
+
+[x] combine read and list. if json missing, read it.
+[x] sketches-recent.md

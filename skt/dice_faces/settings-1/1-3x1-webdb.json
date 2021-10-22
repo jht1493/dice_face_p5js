@@ -1,0 +1,112 @@
+{
+  "setting": "",
+  "back_color": 200,
+  "room_name": "Dice-Play-1",
+  "patch_layout": "2x1",
+  "canvas_size": "1920x1080",
+  "canvas_sizei": 4,
+  "capture_size": "",
+  "capture_sizei": 0,
+  "chat_name": "jht",
+  "chat_chk": 0,
+  "live_index": 0,
+  "live_chk": 0,
+  "patches": [
+    {
+      "ipatch": 0,
+      "imedia": 1,
+      "ieff": 10,
+      "effect": "image",
+      "pad": {
+        "x0": 0,
+        "y0": 0,
+        "width": 960,
+        "height": 1080
+      },
+      "zoomed": 0,
+      "pan_ease": 0,
+      "group": "graph",
+      "labeled": 1,
+      "flush": "left",
+      "face": "none",
+      "align": "center",
+      "alpha": 255,
+      "color": "black",
+      "ncell": 32,
+      "shape": "circle",
+      "loop": 0,
+      "period": 5,
+      "shuffle": 0,
+      "peg_width": 1,
+      "export_on": 0,
+      "iimage": 18
+    },
+    {
+      "ipatch": 1,
+      "imedia": 1,
+      "ieff": 10,
+      "effect": "image",
+      "pad": {
+        "x0": 960,
+        "y0": 0,
+        "width": 960,
+        "height": 1080
+      },
+      "zoomed": 0,
+      "pan_ease": 0,
+      "group": "group",
+      "labeled": 0,
+      "flush": "left",
+      "face": "none",
+      "align": "center",
+      "alpha": 255,
+      "color": "black",
+      "ncell": 32,
+      "shape": "circle",
+      "loop": 0,
+      "period": 5,
+      "shuffle": 0,
+      "peg_width": 1,
+      "export_on": 0,
+      "iimage": 1
+    },
+    {
+      "ipatch": 2,
+      "imedia": 1,
+      "ieff": 10,
+      "effect": "image",
+      "pad": {
+        "x0": 0,
+        "y0": 0,
+        "width": 960,
+        "height": 1080
+      },
+      "ihide": 1,
+      "zoomed": 0,
+      "pan_ease": 0,
+      "group": "fema",
+      "labeled": 0,
+      "flush": "left",
+      "face": "none",
+      "align": "center",
+      "alpha": 255,
+      "color": "black",
+      "ncell": 32,
+      "shape": "circle",
+      "loop": 0,
+      "period": 5,
+      "shuffle": 0,
+      "peg_width": 1,
+      "export_on": 0,
+      "iimage": 1
+    }
+  ],
+  "medias": [
+    null,
+    {
+      "vis": false
+    }
+  ],
+  "pads_lock": 0,
+  "pads_count": 3
+}
