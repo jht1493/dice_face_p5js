@@ -59,6 +59,7 @@ let a_down = 0;
 let a_dir = 'down';
 // let a_dir = 'up';
 let data_index_start;
+let data_index_offset = 0;
 let data_index_end;
 let data_index_down;
 let data_index_up;

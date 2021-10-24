@@ -3,7 +3,9 @@ let page_pause_count;
 function page_pause_start() {
   // page_pause_count = a_fast ? 1 : page_pause_frames;
   // page_pause_count = a_fast ? page_pause_frames / 2 : page_pause_frames;
+  // console.log('page_pause_start day_next', day_next);
   let n = a_fast ? 0 : page_pause_secs;
+  // if (day_next == 1) n = 0;
   page_pause_count = n * frameRate();
   a_state = 'page_pause';
   set_last();

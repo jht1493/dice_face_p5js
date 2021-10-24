@@ -25,12 +25,17 @@ function draw_dots() {
 }
 
 function dot_next() {
-  dot_cindex ^= 1;
-  dot_count_total += dot_count;
+  // console.log('dot_next dot_cindex', dot_cindex);
+  // dot_cindex ^= 1;
+  dot_cindex = 1;
+  // !!@ 2-day
+  // dot_count_total += dot_count;
   dot_count = 0;
   select_entry();
   if (dot_count_total + a_count > dot_panel_max) {
-    fresh_canvas();
+    console.log('dot_next dot_panel_max dot_count_total', dot_count_total);
+    // !!@ 2-day
+    // fresh_canvas();
     dot_count_total = 0;
   }
   if (cycle_done) {
@@ -41,13 +46,16 @@ function dot_next() {
 function cycle_start_init() {
   // console.log('cycle_start_init a_dir', a_dir);
   let_init();
-  a_dir = a_dir === 'up' ? 'down' : 'up';
+  // !!@ 2-day
+  // a_dir = a_dir === 'up' ? 'down' : 'up';
   fresh_canvas();
   load_json();
 }
 
 function fresh_canvas() {
-  background(0);
+  console.log('fresh_canvas day_next', day_next);
+  // background(0);
+  clear_per_day();
   dot_x = 0;
   dot_y = 0;
 }

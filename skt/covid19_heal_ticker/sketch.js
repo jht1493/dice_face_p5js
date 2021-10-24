@@ -14,8 +14,8 @@ function setup() {
 }
 
 function begin_day() {
-  fill(0);
-  rect(0, 0, panel_width, height);
+  // console.log('begin_day day_next', day_next);
+  clear_per_day();
   cycle_init();
   day_start = millis();
   bit_count = 0;
@@ -23,6 +23,19 @@ function begin_day() {
   y_pos = y_top;
   draw_char_start();
   // console.log('begin_day dot_count', dot_count, 'bit_count', bit_count);
+  // !!@ 2-day
+  dot_y = 0;
+  dot_x = 0;
+}
+
+function clear_per_day() {
+  // console.log('clear_per_day day_next', day_next);
+  fill(0);
+  let y = 0;
+  if (day_next >= 1) {
+    y = panel_top;
+  }
+  rect(0, y, width, height);
 }
 
 function draw() {
