@@ -29,8 +29,19 @@ function select_entry() {
   }
   a_date = ent1.on;
   let s = a_count > 1 ? 's' : '';
-  // a_string = a_count + ' USA\nDeath' + s + ' on\n' + a_date + '\n' + a_postfix;
-  a_string = a_date + '\n' + a_count + '\nUSA Death' + s + '\n' + a_postfix;
+  if (day_next == 0) {
+    a_string = a_date + '\n' + a_count + '\n';
+    day_next++;
+  } else {
+    if (day_next == 1) {
+      panel_top = panel_top + dot_y + char_len + y_margin;
+      y_top = char_len * 3;
+    }
+    day_next++;
+    dot_y = 0;
+    dot_x = 0;
+    a_string = a_date + '\n' + a_count + '\nUSA Death' + s + '\n' + a_postfix;
+  }
   end_index = a_string.length - 1;
   begin_day();
 

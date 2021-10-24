@@ -89,12 +89,15 @@ function draw_day_count() {
 function draw_count(str) {
   // let x = x_margin + (char_len * (nchars_wide - str.length)) / 2;
   let boxwidth = char_len * 5;
-  let x = panel_right - x_margin - boxwidth;
-  let y = y_margin;
+  // let xedge = panel_right;
+  let xedge = width;
+  let x = xedge - x_margin - boxwidth;
+  // let y = y_margin;
+  let y = panel_top - char_len;
   fill('black');
   rect(x, y, boxwidth, char_len);
   // x = panel_right - x_margin - char_len * str.length;
-  x = panel_right - char_len * str.length;
+  x = xedge - char_len * str.length;
   for (let ch of str) {
     draw_char(x, y, ch);
     x += char_len;
