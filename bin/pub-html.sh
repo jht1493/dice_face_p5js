@@ -6,9 +6,9 @@ cd ${0%/*}
 excludes="--exclude .DS_Store --exclude .git --exclude node_modules"
 delete=--delete
 test=
-test=--dry-run
+# test=--dry-run
 verbose=
-verbose=v
+# verbose=v
 
 start_time=`date +%s`
 
