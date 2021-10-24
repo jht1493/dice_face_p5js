@@ -91,6 +91,10 @@ function let_init() {
   a_state = 'draw_bit';
   a_paused = 0;
   dot_cindex = 0;
+  let nlines = Math.floor(panel_height / (pix_len * 8));
+  console.log('panel_height', panel_height);
+  console.log('pix_len', pix_len);
+  console.log('nlines', nlines);
 }
 
 function cycle_init() {

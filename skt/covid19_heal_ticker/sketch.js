@@ -71,9 +71,9 @@ function draw_progress() {
 
 function draw_day_count() {
   // str = 'day ' + data_index + '/' + a_data.length + ' ';
-  str = data_index + '/' + a_data.length;
+  let str = 'DAY ' + data_index + ' of ' + a_data.length;
   // console.log('draw_day_count ', str);
-  let th = pix_len;
+  let th = pix_len * 1.5;
   textSize(th);
   // let th = textAscent() + textDescent() + textLeading();
   // th = pix_len * 1.5;
