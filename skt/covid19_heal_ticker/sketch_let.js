@@ -59,12 +59,14 @@ let a_down = 0;
 let a_dir = 'down';
 // let a_dir = 'up';
 let data_index_start;
+let data_index_offset = 0;
 let data_index_end;
 let data_index_down;
 let data_index_up;
 let data_index_mid;
 let load_count = 0;
 let json_loaded = 0;
+let day_next = 0;
 
 function let_init() {
   // load_count = 0;
@@ -75,11 +77,12 @@ function let_init() {
   x_margin = pix_len;
   y_margin = pix_len;
   x_pos = x_margin;
-  y_top = y_margin + (height - n_lines * char_len) / 2;
+  // y_top = y_margin + (height - n_lines * char_len) / 2;
+  y_top = y_margin;
   y_pos = y_top;
   panel_right = panel_len + x_margin;
   panel_width = width - panel_right - x_margin;
-  panel_top = y_margin;
+  panel_top = y_margin + char_len;
   panel_height = height - 3 * y_margin;
   dot_x = 0;
   dot_y = 0;
@@ -95,6 +98,7 @@ function let_init() {
   console.log('panel_height', panel_height);
   console.log('pix_len', pix_len);
   console.log('nlines', nlines);
+  day_next = 0;
 }
 
 function cycle_init() {
