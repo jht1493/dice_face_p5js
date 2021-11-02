@@ -69,7 +69,7 @@ let json_loaded = 0;
 let day_next = 0;
 
 function let_init() {
-  // load_count = 0;
+  // data_index_offset = 85;
   bottom_color = 'white';
   panel_len = width / 2;
   pix_len = panel_len / (nchars_wide * 8);

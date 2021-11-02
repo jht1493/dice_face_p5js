@@ -1,5 +1,7 @@
 function draw_dots_fast() {
   let n = a_fast ? a_fast_n : 1;
+  // attempt at dot rhythm
+  // n = random([0, 1]);
   while (n-- > 0) {
     draw_dots();
   }

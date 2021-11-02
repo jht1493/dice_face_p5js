@@ -11,6 +11,19 @@ function setup() {
   fresh_canvas();
   begin_day();
   load_json();
+  setup_period_reload();
+}
+
+function setup_period_reload() {
+  // let sec = parse_restart_time('23:59:59');
+  let sec = parse_restart_time('13:04:00');
+  console.log('setup_period_reload sec', sec);
+  let per = sec * 1000;
+  setTimeout(function () {
+    let loc = window.location.href;
+    window.location = loc;
+    console.log('setup_period_reload setTimeout ');
+  }, per);
 }
 
 function begin_day() {
@@ -31,11 +44,14 @@ function begin_day() {
 function clear_per_day() {
   // console.log('clear_per_day day_next', day_next);
   fill(0);
-  let y = 0;
+  let yLeft = 0;
+  let yRight = 0;
   if (day_next >= 1) {
-    y = panel_top;
+    yLeft = y_top;
+    yRight = panel_top;
   }
-  rect(0, y, width, height);
+  rect(0, yLeft, panel_right, height);
+  rect(panel_right, yRight, width - panel_right, height);
 }
 
 function draw() {

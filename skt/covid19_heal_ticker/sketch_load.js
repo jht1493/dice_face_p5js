@@ -12,61 +12,12 @@ function load_json() {
     cycle_done = 0;
     a_data = data;
     data_index_down = data.length;
-    data_index_down -= data_index_offset;
+    if (data_index_offset) data_index_down = data_index_offset + 1;
     data_index_up = 0;
     data_index_mid = Math.floor(data_index_down / 2);
+    prepare_data();
     select_entry();
-    // show_max_deaths();
-    sort_max_deaths();
   });
-}
-
-// mindex 85 mdate 2020-04-16 mcount 4607
-function show_max_deaths() {
-  let mindex = -1;
-  let mcount = -1;
-  let mdate;
-  for (let index = 1; index < a_data.length - 1; index++) {
-    let ent1 = a_data[index];
-    let ent0 = a_data[index - 1];
-    let count = ent1.Deaths - ent0.Deaths;
-    if (count > mcount) {
-      mindex = index;
-      mcount = count;
-      mdate = ent1.on;
-    }
-  }
-  console.log('mindex', mindex, 'mdate', mdate, 'mcount', mcount);
-}
-
-// 2020-04-16 4607
-// 2021-01-20 4441
-// 2021-01-12 4389
-// 2021-01-08 4189
-// 2021-01-21 4137
-// 2021-01-27 4128
-// 2021-01-07 4028
-// 2021-01-13 4018
-// 2021-01-26 3982
-// 2020-12-30 3933
-let a_max_deaths;
-function sort_max_deaths() {
-  let dates = [];
-  let ent = a_data[0];
-  dates.push({ count: ent.Deaths, on: ent.on });
-  for (let index = 1; index < a_data.length - 1; index++) {
-    let ent1 = a_data[index];
-    let ent0 = a_data[index - 1];
-    let count = ent1.Deaths - ent0.Deaths;
-    dates.push({ count: count, on: ent1.on });
-  }
-  dates.sort((ent0, ent1) => ent1.count - ent0.count);
-  a_max_deaths = dates;
-  let n = 10;
-  for (let index = 0; index < n; index++) {
-    let ent = dates[index];
-    console.log(ent.on, ent.count);
-  }
 }
 
 function select_entry() {
@@ -87,6 +38,8 @@ function select_entry() {
     if (day_next == 1) {
       panel_top = panel_top + dot_y + char_len + y_margin * 2;
       y_top = char_len * 3;
+      // data_index_down = a_data.length;
+      // a_data = sort_data();
     }
     day_next++;
     a_string = a_date + '\n' + a_count + '\nUSA Death' + s + '\n' + a_postfix;
@@ -103,8 +56,7 @@ function select_entry() {
       }
       data_index = data_index_down;
       ent1 = a_data[data_index];
-      ent0 = a_data[data_index - 1];
-      a_count = ent1.Deaths - ent0.Deaths;
+      a_count = ent1.count;
     } while (a_count < 1);
   }
   function select_up() {
@@ -116,8 +68,7 @@ function select_entry() {
       }
       data_index = data_index_up;
       ent1 = a_data[data_index];
-      ent0 = a_data[data_index - 1];
-      a_count = ent1.Deaths - ent0.Deaths;
+      a_count = ent1.count;
     } while (a_count < 1);
     if (!data_index_start) {
       data_index_start = data_index_up;
@@ -141,9 +92,61 @@ function select_entry() {
         data_index = data_index_up;
       }
       ent1 = a_data[data_index];
-      ent0 = a_data[data_index - 1];
-      a_count = ent1.Deaths - ent0.Deaths;
+      a_count = ent1.count;
     } while (a_count < 1);
     a_down ^= 1;
   }
+}
+
+// mindex 85 mdate 2020-04-16 mcount 4607
+// function show_max_deaths() {
+//   let mindex = -1;
+//   let mcount = -1;
+//   let mdate;
+//   for (let index = 1; index < a_data.length - 1; index++) {
+//     let ent1 = a_data[index];
+//     let ent0 = a_data[index - 1];
+//     let count = ent1.Deaths - ent0.Deaths;
+//     if (count > mcount) {
+//       mindex = index;
+//       mcount = count;
+//       mdate = ent1.on;
+//     }
+//   }
+//   console.log("mindex", mindex, "mdate", mdate, "mcount", mcount);
+// }
+
+// 2020-04-16 4607 85
+// 2021-01-20 4442 364
+// 2021-01-12 4389 356
+// 2021-01-08 4189 352
+// 2021-01-21 4137 365
+// 2021-01-27 4128 371
+// 2021-01-07 4028 351
+// 2021-01-13 4018 357
+// 2021-01-26 3982 370
+// 2020-12-30 3933 343
+
+function prepare_data() {
+  let ent0 = { Deaths: 0 };
+  for (let index = 0; index < a_data.length; index++) {
+    let ent1 = a_data[index];
+    let count = ent1.Deaths - ent0.Deaths;
+    ent1.count = count;
+    ent1.index = index;
+    ent0 = ent1;
+  }
+}
+
+function sort_data() {
+  let data = a_data.slice();
+  data.sort((ent0, ent1) => ent0.count - ent1.count);
+  if (1) {
+    let n = 10;
+    for (let index = 0; index < n; index++) {
+      let ent = data[a_data.length - 1 - index];
+      console.log(ent.on, ent.count, ent.index);
+    }
+  }
+  return data;
 }
