@@ -12,17 +12,19 @@ function setup() {
   begin_day();
   load_json();
   setup_period_reload();
+  // setTimeout(present_action, 5000);
 }
 
 function setup_period_reload() {
-  // let sec = parse_restart_time('23:59:59');
-  let sec = parse_restart_time('13:04:00');
+  let sec = parse_restart_time('23:59:59');
+  // let sec = parse_restart_time('13:26:00');
   console.log('setup_period_reload sec', sec);
   let per = sec * 1000;
   setTimeout(function () {
-    let loc = window.location.href;
-    window.location = loc;
+    // let loc = window.location.href;
+    // window.location = loc;
     console.log('setup_period_reload setTimeout ');
+    cycle_start_init();
   }, per);
 }
 
