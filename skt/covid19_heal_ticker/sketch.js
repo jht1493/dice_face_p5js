@@ -16,7 +16,9 @@ function setup() {
 }
 
 function setup_period_reload() {
-  let sec = parse_restart_time('23:59:59');
+  // Reload at 8am to get most recent update
+  let sec = parse_restart_time('08:00:00');
+  // let sec = parse_restart_time('23:59:59');
   // let sec = parse_restart_time('13:26:00');
   console.log('setup_period_reload sec', sec);
   let per = sec * 1000;
