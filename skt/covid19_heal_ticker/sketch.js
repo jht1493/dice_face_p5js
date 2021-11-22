@@ -20,7 +20,7 @@ function setup_period_reload() {
   let sec = parse_restart_time('08:00:00');
   // let sec = parse_restart_time('23:59:59');
   // let sec = parse_restart_time('13:26:00');
-  console.log('setup_period_reload sec', sec);
+  // console.log('setup_period_reload sec', sec);
   let per = sec * 1000;
   setTimeout(function () {
     // let loc = window.location.href;
@@ -53,6 +53,14 @@ function clear_per_day() {
   if (day_next >= 1) {
     yLeft = y_top;
     yRight = panel_top;
+    console.log(
+      'clear_per_day yRight',
+      yRight,
+      'yLeft',
+      yLeft,
+      'day_next',
+      day_next
+    );
   }
   rect(0, yLeft, panel_right, height);
   rect(panel_right, yRight, width - panel_right, height);

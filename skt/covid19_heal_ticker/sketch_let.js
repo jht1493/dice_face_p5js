@@ -70,6 +70,7 @@ let day_next = 0;
 
 function let_init() {
   // data_index_offset = 85;
+  // data_index_offset = 600;
   bottom_color = 'white';
   panel_len = width / 2;
   pix_len = panel_len / (nchars_wide * 8);
@@ -95,6 +96,7 @@ function let_init() {
   a_paused = 0;
   dot_cindex = 0;
   let nlines = Math.floor(panel_height / (pix_len * 8));
+  console.log('dot_panel_max', dot_panel_max);
   console.log('panel_height', panel_height);
   console.log('pix_len', pix_len);
   console.log('nlines', nlines);
