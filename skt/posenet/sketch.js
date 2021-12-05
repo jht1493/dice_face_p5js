@@ -10,7 +10,7 @@ let new_pos;
 let mov_file = '../assets/mov/IMG_E0088-480p-trim.mov';
 // let mov_dim = { width: 640, height: 468 };
 let mov_dim = { width: 640, height: 360 };
-let clear_period = 3000;
+let clear_period = 1000;
 let a_alpha = 10;
 let dot_colors = [
   [0, 0, 0, a_alpha],
@@ -19,7 +19,8 @@ let dot_colors = [
   [255, 255, 0, a_alpha],
 ];
 let dot_color_index = 0;
-let dot_len = 5;
+let dot_len = 1;
+let line_len = 10;
 // let dot_color = [255, 255, 255];
 let dot_color = [0, 0, 0, 10];
 
@@ -42,7 +43,7 @@ function setup() {
 function draw() {
   // background(0);
   // image(video, 0, 0, width, height);
-  drawKeypoints();
+  // drawKeypoints();
   drawSkeleton();
   select('#time_id').html(video.time());
 }
@@ -64,8 +65,8 @@ function vidLoad() {
   console.log('vidLoad width', video.width, 'height', video.height);
   console.log('duration', video.duration());
   video_duration = video.duration();
-  video.loop();
   video.volume(0);
+  video.loop();
   prepare_ml5();
 }
 
@@ -150,6 +151,7 @@ function drawSkeleton() {
       let partA = skeleton[j][0];
       let partB = skeleton[j][1];
       stroke(dot_color);
+      strokeWeight(line_len);
       line(
         partA.position.x,
         partA.position.y,
