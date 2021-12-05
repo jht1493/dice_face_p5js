@@ -10,8 +10,9 @@ let new_pos;
 let mov_file = '../assets/mov/IMG_E0088-480p-trim.mov';
 // let mov_dim = { width: 640, height: 468 };
 let mov_dim = { width: 640, height: 360 };
-let clear_period = 1000;
-let a_alpha = 10;
+let cycle_period = 200;
+// let a_alpha = 10;
+let a_alpha = 50;
 let dot_colors = [
   [0, 0, 0, a_alpha],
   [255, 0, 0, a_alpha],
@@ -21,31 +22,67 @@ let dot_colors = [
 let dot_color_index = 0;
 let dot_len = 1;
 let line_len = 10;
+let line_len_cycle = 1;
+let line_len_delta = 0.1;
+let line_len_val = line_len;
 // let dot_color = [255, 255, 255];
 let dot_color = [0, 0, 0, 10];
+let g_layer;
+let show_video = 1;
 
 function setup() {
   // createCanvas(320, 180);
-  createCanvas(mov_dim.width, mov_dim.height);
+  let w = mov_dim.width;
+  let h = mov_dim.height;
+  createCanvas(w, h);
+  g_layer = createGraphics(w, h);
+
+  create_ui();
+
+  video = createVideo(mov_file, vidLoad);
+
+  setInterval(perform_cycle, cycle_period);
+
+  video.hide();
+}
+
+function draw() {
+  background(255);
+  line_len_step();
+  if (show_video) {
+    image(video, 0, 0, width, height);
+  }
+  // drawKeypoints();
+  drawSkeleton();
+  image(g_layer, 0, 0);
+  select('#time_id').html(video.time());
+}
+
+function line_len_step() {
+  // let line_len_cycle = 1;
+  // let line_len_delta = 0.1;
+  // let line_len_val = line_len;
+  if (!line_len_cycle) return;
+  line_len_val += line_len_delta;
+  if (line_len_val > line_len || line_len_val <= 0) {
+    line_len_delta = -1 * line_len_delta;
+  }
+}
+
+function create_ui() {
   create_video_slider();
   createSpan().id('status');
   create_buttons();
   createSpan().id('time_id');
   createElement('br');
-
-  video = createVideo(mov_file, vidLoad);
-
-  setInterval(perform_cycle, clear_period);
-
-  // video.hide();
-}
-
-function draw() {
-  // background(0);
-  // image(video, 0, 0, width, height);
-  // drawKeypoints();
-  drawSkeleton();
-  select('#time_id').html(video.time());
+  createCheckbox('Video', show_video).changed(function () {
+    show_video = this.checked();
+    // if (this.checked()) {
+    //   video.show();
+    // } else {
+    //   video.hide();
+    // }
+  });
 }
 
 function perform_cycle() {
@@ -82,7 +119,8 @@ function prepare_ml5() {
 }
 
 function perform_clear() {
-  background(255);
+  // g_layer.background(255);
+  g_layer.clear();
 }
 
 function create_buttons() {
@@ -133,9 +171,14 @@ function drawKeypoints() {
       let keypoint = pose.keypoints[j];
       // Only draw an ellipse is the pose probability is bigger than 0.2
       if (keypoint.score > 0.2) {
-        fill(dot_color);
-        noStroke();
-        ellipse(keypoint.position.x, keypoint.position.y, dot_len, dot_len);
+        g_layer.fill(dot_color);
+        g_layer.noStroke();
+        g_layer.ellipse(
+          keypoint.position.x,
+          keypoint.position.y,
+          dot_len,
+          dot_len
+        );
       }
     }
   }
@@ -150,9 +193,9 @@ function drawSkeleton() {
     for (let j = 0; j < skeleton.length; j++) {
       let partA = skeleton[j][0];
       let partB = skeleton[j][1];
-      stroke(dot_color);
-      strokeWeight(line_len);
-      line(
+      g_layer.stroke(dot_color);
+      g_layer.strokeWeight(line_len_val);
+      g_layer.line(
         partA.position.x,
         partA.position.y,
         partB.position.x,
