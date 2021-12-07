@@ -287,7 +287,7 @@ class eff_image_show {
     // if (!this.group) this.group = 'group';
     this.images = a_images[this.group];
     // if (!this.images) this.images = a_images['group'];
-    console.log('load_image images', this.images, 'group', this.group);
+    // console.log('load_image images', this.images, 'group', this.group);
     if (this.shuffle) {
       this.images = shuffle(this.images);
     }

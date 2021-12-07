@@ -66,12 +66,12 @@ class eff_pose_net {
       let skeleton = poses[i].skeleton;
       // For every skeleton, loop through all body connections
       for (let j = 0; j < skeleton.length; j++) {
-        let partA = skeleton[j][0];
-        let partB = skeleton[j][1];
-        let x1 = partA.position.x;
-        let y1 = partA.position.y;
-        let x2 = partB.position.x;
-        let y2 = partB.position.y;
+        let partA = skeleton[j][0].position;
+        let partB = skeleton[j][1].position;
+        let x1 = partA.x;
+        let y1 = partA.y;
+        let x2 = partB.x;
+        let y2 = partB.y;
 
         x1 = x1 * r1 + ox0;
         y1 = y1 * r1 + oy0;

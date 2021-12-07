@@ -491,7 +491,96 @@ let a_settings = [
     "canvas_resize_ref": ""
   },
   {
-    "setting": "1-hd-hd",
+    "setting": "1-show-posenet-facemesh",
+    "back_color": 200,
+    "room_name": "Dice-Play-1",
+    "patch_layout": "Single",
+    "canvas_size": "640x480",
+    "capture_size": "320x240",
+    "chat_name": "jht",
+    "chat_chk": 0,
+    "live_index": 0,
+    "live_chk": 0,
+    "patches": [
+      {
+        "isrc": {
+          "ipatch": 0,
+          "imedia": 1,
+          "effect": "show",
+          "pad": {
+            "width": 640,
+            "height": 480,
+            "x0": 0,
+            "y0": 0
+          },
+          "ipipe": 0
+        },
+        "eff": {
+          "step_patch": 1
+        }
+      },
+      {
+        "isrc": {
+          "ipatch": 1,
+          "imedia": 1,
+          "effect": "pose_net",
+          "pad": {
+            "width": 640,
+            "height": 480,
+            "x0": 0,
+            "y0": 0
+          },
+          "ipipe": 0
+        },
+        "eff": {
+          "alpha": 255
+        }
+      },
+      {
+        "isrc": {
+          "ipatch": 2,
+          "imedia": 1,
+          "effect": "face_mesh",
+          "pad": {
+            "width": 640,
+            "height": 480,
+            "x0": 0,
+            "y0": 0
+          },
+          "ipipe": 0
+        },
+        "eff": {
+          "alpha": 255,
+          "align": "none",
+          "back_color": 0,
+          "period": 0,
+          "hi_rez": 1,
+          "sticky": 1,
+          "reveal": 0,
+          "reveal_full": 1,
+          "box_outter": 0,
+          "box_rect": 0,
+          "mar_h": 0,
+          "draw": "mesh",
+          "slen": 2,
+          "mask_index": 0,
+          "avg_index": 0,
+          "pixd_n": 8
+        }
+      }
+    ],
+    "medias": [
+      null,
+      {
+        "vis": false
+      }
+    ],
+    "pads_lock": 0,
+    "pads_count": 3,
+    "canvas_resize_ref": ""
+  },
+  {
+    "setting": "8-hd-hd",
     "back_color": 200,
     "room_name": "Dice-Play-1",
     "patch_layout": "Single",
@@ -532,7 +621,7 @@ let a_settings = [
     "canvas_resize_ref": ""
   },
   {
-    "setting": "1-hd-sd",
+    "setting": "8-hd-sd",
     "back_color": 200,
     "room_name": "Dice-Play-1",
     "patch_layout": "Single",
@@ -573,7 +662,7 @@ let a_settings = [
     "canvas_resize_ref": ""
   },
   {
-    "setting": "1-sd-sd",
+    "setting": "8-sd-sd",
     "back_color": 200,
     "room_name": "Dice-Play-1",
     "patch_layout": "Single",
@@ -614,7 +703,7 @@ let a_settings = [
     "canvas_resize_ref": ""
   },
   {
-    "setting": "2-2x2-mesh-del-bri-maz-hd",
+    "setting": "9-2x2-mesh-del-bri-maz-hd",
     "back_color": 200,
     "room_name": "Dice-Play-1",
     "patch_layout": "2x2",
@@ -732,7 +821,7 @@ let a_settings = [
     "canvas_resize_ref": ""
   },
   {
-    "setting": "2-data-slides",
+    "setting": "9-data-slides",
     "back_color": 200,
     "room_name": "Dice-Play-1",
     "patch_layout": "2x1",
@@ -825,7 +914,7 @@ let a_settings = [
     "canvas_resize_ref": ""
   },
   {
-    "setting": "2-live-niner",
+    "setting": "9-live-niner",
     "back_color": 200,
     "room_name": "Dice-Play-1",
     "patch_layout": "4x4",
@@ -999,7 +1088,7 @@ let a_settings = [
     "canvas_resize_ref": ""
   },
   {
-    "setting": "2-live-sixer",
+    "setting": "9-live-sixer",
     "back_color": 200,
     "room_name": "Dice-Play-1",
     "patch_layout": "4x4",
@@ -1125,7 +1214,7 @@ let a_settings = [
     "canvas_resize_ref": ""
   },
   {
-    "setting": "2-low-rez",
+    "setting": "9-low-rez",
     "back_color": 200,
     "room_name": "Dice-Play-1",
     "patch_layout": "Single",
@@ -1163,7 +1252,7 @@ let a_settings = [
     "canvas_resize_ref": ""
   },
   {
-    "setting": "2-slant-2x2-hd",
+    "setting": "9-slant-2x2-hd",
     "back_color": 200,
     "room_name": "Dice-Play-1",
     "patch_layout": "2x2",
@@ -1270,7 +1359,7 @@ let a_settings = [
     "canvas_resize_ref": ""
   },
   {
-    "setting": "2-slant-2x2-sd",
+    "setting": "9-slant-2x2-sd",
     "back_color": 200,
     "room_name": "Dice-Play-1",
     "patch_layout": "2x2",

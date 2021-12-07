@@ -1,0 +1,17 @@
+  'nose', // 1
+  'leftEye', // 2
+  'rightEye', 
+  'leftEar', // 4
+  'rightEar', 
+  'leftShoulder', // 6
+  'rightShoulder', 
+  'leftElbow',  // 8
+  'rightElbow', 
+  'leftWrist', // 10
+  'rightWrist', 
+  'leftHip', // 12
+  'rightHip', 
+  'leftKnee', // 14
+  'rightKnee', 
+  'leftAnkle', // 16
+  'rightAnkle' // 17
