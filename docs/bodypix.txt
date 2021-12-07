@@ -1,0 +1,8 @@
+bodypix.txt
+
+https://learn.ml5js.org/#/reference/bodypix
+
+
+https://editor.p5js.org/ml5/sketches/BodyPix_Webcam_Parts
+
+https://editor.p5js.org/ml5/sketches/BodyPix_Webcam

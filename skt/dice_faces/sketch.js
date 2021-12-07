@@ -66,7 +66,10 @@ function draw_patch(ipatch, prior) {
 function set_background() {
   let bg = a_ui.back_color;
   // console.log('set_background a_ui.back_color', a_ui.back_color);
-  if (!bg) return;
+  if (!bg) {
+    clear();
+    return;
+  }
   if (bg < 0) {
     let src = patch_index1(-bg);
     if (src && src.avg_color) {

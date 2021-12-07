@@ -1,0 +1,10 @@
+ml5js.txt
+
+https://p5js.org/reference/#/p5/createVideo
+
+https://learn.ml5js.org/#/reference/posenet
+
+
+sftp://jht1493.net//opt/bitnami/apache/htdocs/dice_face/posenet/IMG_E0088-480p-trim.mov
+
+https://jht1493.net/dice_face/posenet/IMG_E0088-480p-trim.mov

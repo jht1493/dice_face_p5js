@@ -10,9 +10,7 @@ let new_pos;
 // let mov_file = '../assets/mov/IMG_E0088-480p-trim.mov';
 // let mov_file = '../assets/mov/Trimed.mov';
 // let mov_file = '../assets/mov/JHT-2011-07-Ashtanga.m4v';
-let mov_file = '../assets/mov/JHT-2011-10-02-Ashtanga.m4v';
-// skt/assets/mov/JHT-2011-10-02-Ashtanga.m4v
-// let mov_file = '../assets/mov/JHT-2013-11-14-640x360.m4v';
+let mov_file = '../assets/mov/JHT-2013-11-14-640x360.m4v';
 // let mov_dim = { width: 640, height: 468 };
 let mov_dim = { width: 640, height: 360 };
 let cycle_period = 1000;
@@ -36,6 +34,9 @@ let g_layer;
 let show_video = 1;
 let n_segs = 10;
 let a_jiggle = 1;
+let bodypix;
+let segmentation;
+let video_ready;
 
 function setup() {
   // createCanvas(320, 180);
@@ -51,6 +52,8 @@ function setup() {
   setInterval(perform_cycle, cycle_period);
 
   video.hide();
+
+  bodypix = ml5.bodyPix();
 }
 
 function draw() {
@@ -59,10 +62,27 @@ function draw() {
   if (show_video) {
     image(video, 0, 0, width, height);
   }
+  if (video_ready) {
+    bodypix.segment(video, gotResults);
+  }
   drawKeypoints();
   drawSkeleton();
   image(g_layer, 0, 0);
   select('#time_id').html(video.time());
+}
+
+function prepare_ml5() {
+  console.log('prepare_ml5 video', video);
+  // bodypix.segment(video, gotResults);
+}
+
+function gotResults(err, result) {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  segmentation = result;
+  g_layer.image(segmentation.backgroundMask, 0, 0, width, height);
 }
 
 function line_len_step() {
@@ -113,17 +133,7 @@ function vidLoad() {
   video.volume(0);
   video.loop();
   prepare_ml5();
-}
-
-function prepare_ml5() {
-  console.log('prepare_ml5 video', video);
-  // Create a new poseNet method with a single detection
-  poseNet = ml5.poseNet(video, modelReady);
-  // This sets up an event that fills the global variable "poses"
-  // with an array every time new poses are detected
-  poseNet.on('pose', function (results) {
-    poses = results;
-  });
+  video_ready = 1;
 }
 
 function perform_clear() {

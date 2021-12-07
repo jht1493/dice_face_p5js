@@ -1,0 +1,66 @@
+posenet-keypoints.txt
+
+posenet.txt
+
+https://medium.com/tensorflow/real-time-human-pose-estimation-in-the-browser-with-tensorflow-js-7dd0bc881cd5
+
+https://github.com/tensorflow/tfjs-models/tree/master/posenet/src
+
+https://github.com/tensorflow/tfjs-models/tree/master/pose-detection
+
+
+https://github.com/tensorflow/tfjs-models/blob/master/posenet/src/keypoints.ts
+
+export const partNames = [
+  'nose', 'leftEye', 'rightEye', 'leftEar', 'rightEar', 'leftShoulder', // 6
+  'rightShoulder', 'leftElbow', 'rightElbow', 'leftWrist', 'rightWrist', // 11
+  'leftHip', 'rightHip', 'leftKnee', 'rightKnee', 'leftAnkle', 'rightAnkle' // 17
+];
+
+const connectedPartNames: StringTuple[] = [
+  ['leftHip', 'leftShoulder'], ['leftElbow', 'leftShoulder'],
+  ['leftElbow', 'leftWrist'], ['leftHip', 'leftKnee'],
+  ['leftKnee', 'leftAnkle'], ['rightHip', 'rightShoulder'],
+  ['rightElbow', 'rightShoulder'], ['rightElbow', 'rightWrist'],
+  ['rightHip', 'rightKnee'], ['rightKnee', 'rightAnkle'],
+  ['leftShoulder', 'rightShoulder'], ['leftHip', 'rightHip']
+];
+
+export const poseChain: StringTuple[] = [
+  ['nose', 'leftEye'], ['leftEye', 'leftEar'], ['nose', 'rightEye'],
+  ['rightEye', 'rightEar'], ['nose', 'leftShoulder'],
+  ['leftShoulder', 'leftElbow'], ['leftElbow', 'leftWrist'],
+  ['leftShoulder', 'leftHip'], ['leftHip', 'leftKnee'],
+  ['leftKnee', 'leftAnkle'], ['nose', 'rightShoulder'],
+  ['rightShoulder', 'rightElbow'], ['rightElbow', 'rightWrist'],
+  ['rightShoulder', 'rightHip'], ['rightHip', 'rightKnee'],
+  ['rightKnee', 'rightAnkle']
+];
+
+export const partChannels: string[] = [
+  'left_face',
+  'right_face',
+  'right_upper_leg_front',
+  'right_lower_leg_back',
+  'right_upper_leg_back',
+  'left_lower_leg_front',
+  'left_upper_leg_front',
+  'left_upper_leg_back',
+  'left_lower_leg_back',
+  'right_feet',
+  'right_lower_leg_front',
+  'left_feet',
+  'torso_front',
+  'torso_back',
+  'right_upper_arm_front',
+  'right_upper_arm_back',
+  'right_lower_arm_back',
+  'left_lower_arm_front',
+  'left_upper_arm_front',
+  'left_upper_arm_back',
+  'left_lower_arm_back',
+  'right_hand',
+  'right_lower_arm_front',
+  'left_hand'
+];
+
