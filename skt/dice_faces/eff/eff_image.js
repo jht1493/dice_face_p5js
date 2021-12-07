@@ -129,7 +129,8 @@ class eff_image_show {
     if (!this.labeled) return;
     let layer = this.output;
     let index = this.image_name.lastIndexOf('/') + 1;
-    let str = this.image_name.substr(index, 3);
+    let lindex = this.image_name.lastIndexOf('.');
+    let str = this.image_name.substr(index, lindex - index);
     let ta = layer.textAscent();
     let td = layer.textDescent();
     let tw = layer.textWidth(str);
@@ -282,7 +283,11 @@ class eff_image_show {
   }
   load_image() {
     this.nnits = 0;
+    // !!@ this.group is string undefined sometimes. not sure why.
+    // if (!this.group) this.group = 'group';
     this.images = a_images[this.group];
+    // if (!this.images) this.images = a_images['group'];
+    console.log('load_image images', this.images, 'group', this.group);
     if (this.shuffle) {
       this.images = shuffle(this.images);
     }

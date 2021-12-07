@@ -71,9 +71,8 @@ function build_webdb() {
     const dpath = path.join(webdbPath, adir);
 
     let dfiles = fs.readdirSync(dpath);
-    dfiles = dfiles.filter(
-      (item) => item.substr(0, 1) !== '.' && item.substr(3, 5) !== '.json'
-    );
+    dfiles = dfiles.filter(filter_out_json);
+    // (item) => item.substr(0, 1) !== '.' && item.substr(3, 5) !== '.json'
     dfiles.sort();
 
     console.log('build_webdb adir', adir, 'n', dfiles.length);
@@ -90,6 +89,14 @@ function build_webdb() {
   str += JSON.stringify(files, null, 2);
 
   fs.writeFileSync(outPath, str);
+}
+
+function filter_out_json(item) {
+  if (item.substr(0, 1) == '.') return false;
+  let lindex = item.lastIndexOf('.');
+  if (lindex < 0) return false;
+  if (item.substr(lindex, 5) == '.json') return false;
+  return true;
 }
 
 function interleave(files, aprop, bprop) {
@@ -144,7 +151,7 @@ function build_settings() {
   console.log('settings.length', settings.length);
 }
 
-// build_webdb();
+build_webdb();
 
 build_settings();
 

@@ -171,23 +171,14 @@ let a_images = {
   ],
   "jht": [
     "IMG_4491.JPEG",
-    "IMG_4491.json",
     "IMG_5398.JPEG",
-    "IMG_5398.json",
     "IMG_6338.JPEG",
-    "IMG_6338.json",
     "IMG_6410.JPEG",
-    "IMG_6410.json",
     "IMG_6498.JPG",
-    "IMG_6498.json",
     "IMG_6885.JPEG",
-    "IMG_6885.json",
     "IMG_6946.JPEG",
-    "IMG_6946.json",
     "IMG_7146.JPEG",
-    "IMG_7146.json",
     "IMG_7436.JPEG",
-    "IMG_7436.json",
     "IMG_7555.JPEG"
   ],
   "male": [
@@ -270,7 +261,6 @@ let a_images = {
     "553.jpg"
   ],
   "test": [
-    "fac-1.json",
     "fac.png"
   ],
   "z-fema": [
