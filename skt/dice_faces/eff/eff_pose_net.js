@@ -86,19 +86,21 @@ class eff_pose_net {
     let x5;
     let y6;
     let x6;
+    // rightShoulder
     {
       let { x, y } = pose.rightShoulder;
       x = x * r1 + px0;
       y = y * r1 + py0;
-      circle(x, y, dy);
+      circle(x, y + dy / 2, dy);
       x1 = x;
       y1 = y;
     }
+    // leftShoulder
     {
       let { x, y } = pose.leftShoulder;
       x = x * r1 + px0;
       y = y * r1 + py0;
-      circle(x, y, dy);
+      circle(x, y + dy / 2, dy);
       x2 = x;
       y2 = y;
     }
@@ -116,9 +118,18 @@ class eff_pose_net {
       x4 = x;
       y4 = y;
     }
-    quad(x1, y1, x2, y2, x3, y3, x4, y4);
+    x5 = x4 + (x3 - x4) / 6;
+    y5 = y1 + ((y4 - y1) * 2) / 3;
+    x6 = x3 - (x3 - x4) / 6;
+    y6 = y2 + ((y3 - y2) * 2) / 3;
+    // quad(x1, y1, x2, y2, x3, y3, x4, y4);
+    quad(x1, y1, x2, y2, x6, y6, x5, y5);
+    quad(x5, y5, x6, y6, x3, y3, x4, y4);
+    this.draw_arms(pose, x1, y1, x2, y2);
   }
-
+  draw_arms(pose, x1, y1, x2, y2) {
+    let { px0, py0, r1, dy } = this;
+  }
   drawKeypoints(poses) {
     // fill('yellow');
     noStroke();
