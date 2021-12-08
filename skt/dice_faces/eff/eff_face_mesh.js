@@ -18,6 +18,7 @@ class eff_face_mesh {
     mask_index: [0, 1440],
     avg_index: [0, 1440],
     pixd_n: [8, 16, 32, 64, 128],
+    detect_max: [1, 10],
   };
   static tri_dir = [
     [
@@ -73,8 +74,10 @@ class eff_face_mesh {
     // this.hi_rez = 1; // Process at output pad resolution
     this.init_input = this.input;
     this.cycle_period = 0;
-    this.from = 0; // Only use first face detected
-    this.to = 1;
+    // this.from = 0; // Only use first face detected
+    this.from = 0;
+    this.to = this.detect_max; // Detect max
+    // this.to = 1;
     this.mesh_done = 0;
     this.nnits = 0;
     this.iperiod = 0;

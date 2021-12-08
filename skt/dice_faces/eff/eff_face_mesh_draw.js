@@ -20,6 +20,7 @@ function face_mesh_draw(nthis, img, predictions) {
   let ncol = 0;
   let from = nthis.from;
   let to = nthis.to;
+  // console.log('face_mesh_draw to', to);
   if (to > predictions.length) to = predictions.length;
   for (let i = from; i < to; i++) {
     const pred = predictions[i];

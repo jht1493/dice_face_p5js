@@ -565,7 +565,8 @@ let a_settings = [
           "slen": 2,
           "mask_index": 0,
           "avg_index": 0,
-          "pixd_n": 8
+          "pixd_n": 8,
+          "detect_max": 10
         }
       }
     ],
