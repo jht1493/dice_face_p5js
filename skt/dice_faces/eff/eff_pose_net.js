@@ -1,5 +1,9 @@
 class eff_pose_net {
-  static meta_props = { alpha: [255, 230, 180, 100, 10] };
+  static meta_props = {
+    alpha: [255, 230, 180, 100, 10],
+    points: [0, 1],
+    skel: [0, 1],
+  };
   constructor(props) {
     Object.assign(this, props);
     this.init(this);
@@ -9,8 +13,8 @@ class eff_pose_net {
       this.poseNet.video = this.video;
     }
     a_poses = this.poses;
-    // this.drawKeypoints(this.poses);
-    this.drawSkeleton(this.poses);
+    if (this.points) this.drawKeypoints(this.poses);
+    if (this.skel) this.drawSkeleton(this.poses);
     this.drawFigure(this.poses);
   }
   init() {
@@ -38,8 +42,9 @@ class eff_pose_net {
     // Loop through all the poses detected
     for (let i = 0; i < poses.length; i++) {
       let col = dot_colors[i % dot_colors.length];
+      col[3] = this.alpha;
       stroke(col);
-      fill(col[0], col[1], col[2], 100);
+      fill(col);
       let pose = poses[i].pose;
       this.draw_pose(pose);
     }
@@ -50,24 +55,45 @@ class eff_pose_net {
   }
   draw_top(pose) {
     let { px0, py0, r1 } = this;
-    let fw = pose.rightEar.x - pose.leftEar.x;
-    let sl = pose.leftShoulder.y;
-    let sr = pose.rightShoulder.y;
-    let ds = sr - sl;
-    sl += ds / 2;
-    let fh = sl - pose.nose.y;
+
+    let x1 = pose.rightShoulder.x * r1 + px0;
+    let y1 = pose.rightShoulder.y * r1 + py0;
+    let x2 = pose.leftShoulder.x * r1 + px0;
+    let y2 = pose.leftShoulder.y * r1 + py0;
+
     let x0 = pose.nose.x * r1 + px0;
     let y0 = pose.nose.y * r1 + py0;
-    fw *= r1;
-    fh *= r1;
-    ellipse(x0, y0, fw, fh);
+
+    let dx = x2 - x1;
+    let dy = y2 - y1;
+    let a = atan2(dy, dx);
+
+    let x3 = x1 + dx / 2;
+    let y3 = y1 + dy / 2;
+
+    let fh = dist(x3, y3, x0, y0);
+    let fw = (pose.rightEar.x - pose.leftEar.x) * r1;
     let w = fw / 8;
     let h = fh / 2;
-    let y1 = y0 + h;
-    let x1 = x0 - w;
-    let x2 = x0 + w;
-    let y3 = y1 + h;
-    quad(x1, y1, x2, y1, x2 + w, y3, x1 - w, y3);
+
+    push();
+    translate(x3, y3);
+    rotate(a);
+
+    ellipse(0, -2 * h, fw, fh);
+
+    let x4 = 0 - w;
+    let y4 = 0 - h;
+    let x5 = 0 + w;
+    let y5 = 0 - h;
+    let x6 = 0 - 2 * w;
+    let y6 = 0;
+    let x7 = 0 + 2 * w;
+    let y7 = 0;
+    quad(x4, y4, x5, y5, x7, y7, x6, y6);
+
+    pop();
+
     this.w = w;
     this.h = h;
   }
@@ -147,6 +173,7 @@ class eff_pose_net {
     for (let i = 0; i < poses.length; i++) {
       // For each pose detected, loop through all the keypoints
       let col = dot_colors[i % dot_colors.length];
+      col[3] = this.alpha;
       fill(col);
       let pose = poses[i].pose;
       for (let j = 0; j < pose.keypoints.length; j++) {
@@ -176,6 +203,7 @@ class eff_pose_net {
     for (let i = 0; i < poses.length; i++) {
       // For every skeleton, loop through all body connections
       let col = dot_colors[i % dot_colors.length];
+      col[3] = this.alpha;
       stroke(col);
       let skeleton = poses[i].skeleton;
       for (let j = 0; j < skeleton.length; j++) {

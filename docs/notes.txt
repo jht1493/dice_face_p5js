@@ -1,5 +1,8 @@
 notes.txt
 
+    console.log('face_mesh_draw to predictions.length', predictions.length);
+
+
 Where's my p5js.editor stuff?
 
 [] env param for user_name jht1493

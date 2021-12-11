@@ -45,10 +45,10 @@ class eff_pose_net {
     }
   }
   draw_pose(pose) {
-    this.draw_neck(pose);
+    this.draw_top(pose);
     this.draw_torso(pose);
   }
-  draw_neck(pose) {
+  draw_top(pose) {
     let { px0, py0, r1 } = this;
     let fw = pose.rightEar.x - pose.leftEar.x;
     let sl = pose.leftShoulder.y;
@@ -56,17 +56,16 @@ class eff_pose_net {
     let ds = sr - sl;
     sl += ds / 2;
     let fh = sl - pose.nose.y;
-    let { x, y } = pose.nose;
-    x = x * r1 + px0;
-    y = y * r1 + py0;
+    let x0 = pose.nose.x * r1 + px0;
+    let y0 = pose.nose.y * r1 + py0;
     fw *= r1;
     fh *= r1;
-    ellipse(x, y, fw, fh);
+    ellipse(x0, y0, fw, fh);
     let w = fw / 8;
     let h = fh / 2;
-    let y1 = y + h;
-    let x1 = x - w;
-    let x2 = x + w;
+    let y1 = y0 + h;
+    let x1 = x0 - w;
+    let x2 = x0 + w;
     let y3 = y1 + h;
     quad(x1, y1, x2, y1, x2 + w, y3, x1 - w, y3);
     this.w = w;
@@ -101,45 +100,39 @@ class eff_pose_net {
     circle(x2, y2, h);
     let dx = x2 - x1;
     let dy = y2 - y1;
-    let r = sqrt(dx * dx + dy * dy);
-    let dxh = dx * (hh / r);
-    let dyh = dy * (hh / r);
-    let x3 = x2 - dyh;
-    let y3 = y2 - dxh;
-    let x4 = x2 + dyh;
-    let y4 = y2 + dxh;
-    let j = hh / 2;
-    let dxj = dx * (j / r);
-    let dyj = dy * (j / r);
-    let x5 = x1 - dyj;
-    let y5 = y1 - dxj;
-    let x6 = x1 + dyj;
-    let y6 = y1 + dxj;
+    let r = hh;
+    let a = atan2(dy, dx);
+    let x3 = x2 + r * cos(a - HALF_PI);
+    let y3 = y2 + r * sin(a - HALF_PI);
+    let x4 = x2 + r * cos(a + HALF_PI);
+    let y4 = y2 + r * sin(a + HALF_PI);
+    r = hh / 2;
+    let x5 = x1 + r * cos(a - HALF_PI);
+    let y5 = y1 + r * sin(a - HALF_PI);
+    let x6 = x1 + r * cos(a + HALF_PI);
+    let y6 = y1 + r * sin(a + HALF_PI);
     quad(x3, y3, x4, y4, x6, y6, x5, y5);
-    this.draw_fore_arm(wrist, x1, y1, j);
+    this.draw_fore_arm(wrist, x1, y1, r);
   }
-  draw_fore_arm(wrist, x1, y1, j) {
+  draw_fore_arm(wrist, x1, y1, r) {
     let { px0, py0, r1 } = this;
     let x0 = wrist.x * r1 + px0;
     let y0 = wrist.y * r1 + py0;
-    circle(x1, y1, j * 2);
+    circle(x1, y1, r * 2);
     let dx = x1 - x0;
     let dy = y1 - y0;
-    let r = sqrt(dx * dx + dy * dy);
-    let hh = j;
-    let dxh = dx * (hh / r);
-    let dyh = dy * (hh / r);
-    let x3 = x1 - dyh;
-    let y3 = y1 - dxh;
-    let x4 = x1 + dyh;
-    let y4 = y1 + dxh;
-    let dxj = dxh;
-    let dyj = dyh;
-    let x5 = x0 - dyj;
-    let y5 = y0 - dxj;
-    let x6 = x0 + dyj;
-    let y6 = y0 + dxj;
+    let a = atan2(dy, dx);
+    let x3 = x1 + r * cos(a - HALF_PI);
+    let y3 = y1 + r * sin(a - HALF_PI);
+    let x4 = x1 + r * cos(a + HALF_PI);
+    let y4 = y1 + r * sin(a + HALF_PI);
+    let x5 = x0 + r * cos(a - HALF_PI);
+    let y5 = y0 + r * sin(a - HALF_PI);
+    let x6 = x0 + r * cos(a + HALF_PI);
+    let y6 = y0 + r * sin(a + HALF_PI);
     quad(x3, y3, x4, y4, x6, y6, x5, y5);
+    circle(x0, y0, r * 2);
+    // draw_hand(x0, y0, r);
   }
   drawKeypoints(poses) {
     // fill('yellow');
