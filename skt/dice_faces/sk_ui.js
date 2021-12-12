@@ -23,6 +23,7 @@ let a_effects = [
   { label: 'slit_scan', eff: eff_slit_scan },
   { label: 'text', eff: eff_text },
   { label: 'triangle', eff: eff_triangle },
+  { label: 'bodypix', eff: eff_bodypix },
   // { label: 'face_band', eff: eff_face_band },
   // { label: 'face_flat', eff: eff_face_flat },
   // { label: 'face_points', eff: eff_face_points },

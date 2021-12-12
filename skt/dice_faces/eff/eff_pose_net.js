@@ -1,8 +1,12 @@
 class eff_pose_net {
   static meta_props = {
     alpha: [255, 230, 180, 100, 10],
-    points: [0, 1],
-    skel: [0, 1],
+    _points: [0, 1],
+    points_size: [10, 20, 30, 40],
+    points_color_offset: [0, 1, 2, 3],
+    _skel: [0, 1],
+    skel_weight: [1, 5, 10, 20],
+    skel_color_offset: [0, 1, 2, 3],
   };
   constructor(props) {
     Object.assign(this, props);
@@ -158,7 +162,25 @@ class eff_pose_net {
     let y6 = y0 + r * sin(a + HALF_PI);
     quad(x3, y3, x4, y4, x6, y6, x5, y5);
     circle(x0, y0, r * 2);
-    // draw_hand(x0, y0, r);
+    this.draw_hand(x0, y0, r, a);
+  }
+  draw_hand(x0, y0, r, a) {
+    // r = r * 0.75;
+    let x2 = x0 - 1 * r * cos(a);
+    let y2 = y0 - 1 * r * sin(a);
+    let x1 = x0 - 3 * r * cos(a);
+    let y1 = y0 - 3 * r * sin(a);
+    let r1 = r * 0.75;
+    let x3 = x2 + r1 * cos(a - HALF_PI);
+    let y3 = y2 + r1 * sin(a - HALF_PI);
+    let x4 = x2 + r1 * cos(a + HALF_PI);
+    let y4 = y2 + r1 * sin(a + HALF_PI);
+    let r2 = r * 1.5;
+    let x5 = x1 + r2 * cos(a - HALF_PI);
+    let y5 = y1 + r2 * sin(a - HALF_PI);
+    let x6 = x1 + r2 * cos(a + HALF_PI);
+    let y6 = y1 + r2 * sin(a + HALF_PI);
+    quad(x3, y3, x4, y4, x6, y6, x5, y5);
   }
   drawKeypoints(poses) {
     // fill('yellow');
@@ -169,10 +191,12 @@ class eff_pose_net {
     let px0 = pad.x0;
     let py0 = pad.y0;
     let r1 = h / this.input.height;
+    let len = this.points_size;
     // Loop through all the poses detected
     for (let i = 0; i < poses.length; i++) {
       // For each pose detected, loop through all the keypoints
-      let col = dot_colors[i % dot_colors.length];
+      let ii = i + this.points_color_offset;
+      let col = dot_colors[ii % dot_colors.length];
       col[3] = this.alpha;
       fill(col);
       let pose = poses[i].pose;
@@ -185,13 +209,13 @@ class eff_pose_net {
           let { x, y } = keypoint.position;
           x = x * r1 + px0;
           y = y * r1 + py0;
-          ellipse(x, y, 10, 10);
+          ellipse(x, y, len, len);
         }
       }
     }
   }
   drawSkeleton(poses) {
-    strokeWeight(1);
+    strokeWeight(this.skel_weight);
     // stroke('red');
     let pad = this.isrc.pad;
     // let w = pad.width;
@@ -202,7 +226,8 @@ class eff_pose_net {
     // Loop through all the skeletons detected
     for (let i = 0; i < poses.length; i++) {
       // For every skeleton, loop through all body connections
-      let col = dot_colors[i % dot_colors.length];
+      let ii = i + this.skel_color_offset;
+      let col = dot_colors[ii % dot_colors.length];
       col[3] = this.alpha;
       stroke(col);
       let skeleton = poses[i].skeleton;

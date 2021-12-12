@@ -54,6 +54,8 @@ function draw_patch(ipatch, prior) {
     mouse_event_check(inst);
   }
   if (isrc.ipipe && prior && prior.output) {
+    // players must use the current value of .input
+    // for pipe to work
     inst.input = prior.output;
   }
   inst.render();
