@@ -6,12 +6,22 @@ let my_canvas;
 
 function setup() {
   my_canvas = createCanvas(a_width, a_height);
+  // let parent = document.getElementsByTagName('body')[0];
+  // parent.insertBefore(my_canvas.elt, title.elt);
   create_ui();
   let_init();
   fresh_canvas();
   begin_day();
   load_json();
   setup_period_reload();
+  let adiv = createDiv();
+  adiv.style('font-size:24px');
+  let title = createDiv('COVID-19 Memorial Ticker (preview)');
+  let copyr = createDiv(
+    'Copyright 2020-2021 John Henry Thompson & Shindy Johnson'
+  );
+  adiv.child(title);
+  adiv.child(copyr);
   // setTimeout(present_action, 5000);
 }
 
