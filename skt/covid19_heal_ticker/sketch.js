@@ -14,6 +14,10 @@ function setup() {
   begin_day();
   load_json();
   setup_period_reload();
+  show_copyright();
+}
+
+function show_copyright() {
   let adiv = createDiv();
   adiv.style('font-size:24px');
   let title = createDiv('COVID-19 Memorial Ticker (preview)');
