@@ -1,0 +1,18 @@
+daily-ticker.txt
+
+https://github.com/EP-Visual-Design/COVID-19-parsed-data/blob/main/c_data/world/c_days/2021-12-22.json
+
+  {
+    "c_ref": "United States",
+    "totals": {
+      "Cases": 51545991,
+      "Deaths": 812069
+    },
+    "daily": {
+      "Cases": 238378,
+      "Deaths": 2024
+    }
+  },
+
+https://editor.p5js.org/jht1493/sketches/1ZajWH3S8
+loadJSON covid19 graph

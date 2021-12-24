@@ -24,9 +24,15 @@ function show_copyright() {
   let copyr = createDiv(
     'Copyright 2020-2021 John Henry Thompson & Shindy Johnson'
   );
+  let adash = createA(
+    'https://epvisual.com/COVID-19-Impact/Dashboard/a0/',
+    'COVID-19-Impact Dashboard',
+    '_blank'
+  );
+  // adiv.child([title, copyr, adash]);
   adiv.child(title);
+  adiv.child(adash);
   adiv.child(copyr);
-  // setTimeout(present_action, 5000);
 }
 
 function setup_period_reload() {
