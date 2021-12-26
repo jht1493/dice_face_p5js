@@ -21,14 +21,8 @@ function show_copyright() {
   let adiv = createDiv();
   adiv.style('font-size:24px');
   let title = createDiv('COVID-19 Memorial Ticker (preview)');
-  let copyr = createDiv(
-    'Copyright 2020-2021 John Henry Thompson & Shindy Johnson'
-  );
-  let adash = createA(
-    'https://epvisual.com/COVID-19-Impact/Dashboard/a0/',
-    'COVID-19-Impact Dashboard',
-    '_blank'
-  );
+  let copyr = createDiv('Copyright 2020-2021 John Henry Thompson & Shindy Johnson');
+  let adash = createA('https://epvisual.com/COVID-19-Impact/Dashboard/a0/', 'COVID-19-Impact Dashboard', '_blank');
   // adiv.child([title, copyr, adash]);
   adiv.child(title);
   adiv.child(adash);
@@ -73,14 +67,7 @@ function clear_per_day() {
   if (day_next >= 1) {
     yLeft = y_top;
     yRight = panel_top;
-    console.log(
-      'clear_per_day yRight',
-      yRight,
-      'yLeft',
-      yLeft,
-      'day_next',
-      day_next
-    );
+    // console.log('clear_per_day yRight', yRight, 'yLeft', yLeft, 'day_next', day_next);
   }
   rect(0, yLeft, panel_right, height);
   rect(panel_right, yRight, width - panel_right, height);
