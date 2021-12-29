@@ -20,6 +20,7 @@ function load_json() {
 }
 
 function select_entry() {
+  console.log('select_entry day_next', day_next);
   let ent1, ent0;
   if (a_dir === 'down') {
     select_down();
@@ -31,7 +32,8 @@ function select_entry() {
   a_date = ent1.on;
   let s = a_count > 1 ? 's' : '';
   if (day_next == 0) {
-    a_string = a_date + '\n' + a_count + '\n';
+    // a_string = a_date + '\n' + a_count + '\n'; // !!@
+    a_string = a_date + ' ' + a_count;
     day_next++;
   } else {
     if (day_next == 1) {
@@ -45,6 +47,7 @@ function select_entry() {
   }
   end_index = a_string.length - 1;
   begin_day();
+  console.log('select_entry a_count', a_count);
 
   function select_down() {
     do {
@@ -130,7 +133,8 @@ function prepare_data() {
   let ent0 = { Deaths: 0 };
   for (let index = 0; index < a_data.length; index++) {
     let ent1 = a_data[index];
-    let count = ent1.Deaths - ent0.Deaths;
+    // let count = ent1.Deaths - ent0.Deaths;
+    let count = ent1.Deaths;
     ent1.count = count;
     ent1.index = index;
     ent0 = ent1;

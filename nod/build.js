@@ -15,6 +15,8 @@ const buildnum_files = [
   'index.html',
   'covid19_heal_ticker/index.html',
   'covid19_heal_ticker/sk_ui.js',
+  'covid19_usa_recent/index.html',
+  'covid19_usa_recent/sk_ui.js',
   'dice_faces/index.html',
   'dice_faces/sk_ui.js',
   'posenet/index.html',
