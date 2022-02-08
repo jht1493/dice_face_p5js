@@ -13,6 +13,7 @@ class eff_face_mesh {
     // _src_patch: [0, 1],
     _mar_h: [0, 0, 2, 5, 10],
     draw: ['mesh', 'dots', 'rects', 'tris', 'crop', 'pixd', 'cycle'],
+    draw_mod: [4], // how many to cycle thru
     slen: [2, 1, 2, 3, 4, 5, 10],
     // show: [1, 0],
     mask_index: [0, 1440],
@@ -66,7 +67,7 @@ class eff_face_mesh {
   }
   patch_stepper() {
     // console.log('eff_face_mesh patch_stepper', this.draw_index, '', this.draw);
-    this.draw_index = (this.draw_index + 1) % 4;
+    this.draw_index = (this.draw_index + 1) % this.draw_mod;
     this.draw = this.constructor.meta_props.draw[this.draw_index];
     // console.log('eff_face_mesh draw_index', this.draw_index, '', this.draw);
   }

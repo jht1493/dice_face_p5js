@@ -21,7 +21,7 @@ function show_copyright() {
   let adiv = createDiv();
   adiv.style('font-size:24px');
   let title = createDiv('COVID-19 Memorial Ticker (preview)');
-  let copyr = createDiv('Copyright 2020-2021 John Henry Thompson & Shindy Johnson');
+  let copyr = createDiv('Copyright 2020-2022 John Henry Thompson & Shindy Johnson');
   let adash = createA('https://epvisual.com/COVID-19-Impact/Dashboard/a0/', 'COVID-19-Impact Dashboard', '_blank');
   // adiv.child([title, copyr, adash]);
   adiv.child(title);
@@ -87,7 +87,7 @@ function draw() {
 
   draw_count(dot_count + '');
 
-  draw_progress();
+  // draw_progress();
 
   draw_day_count();
 
@@ -119,15 +119,17 @@ function draw_progress() {
 
 function draw_day_count() {
   // str = 'day ' + data_index + '/' + a_data.length + ' ';
-  let str = 'DAY ' + data_index + ' of ' + a_data.length;
+  // let str = 'DAY ' + data_index + ' of ' + a_data.length;
+  let str = 'USA DEATHS - DAY ' + data_index + ' of ' + a_data.length;
   // console.log('draw_day_count ', str);
   let th = pix_len * 1.5;
   textSize(th);
   // let th = textAscent() + textDescent() + textLeading();
   // th = pix_len * 1.5;
   let tw = textWidth(str);
-  let x = width - tw - 1;
-  let y = height - 1;
+  // let x = width - tw - 1;
+  let x = 0;
+  let y = height - 2;
   fill(0);
   rect(x, y - th, tw, th);
   fill('white');

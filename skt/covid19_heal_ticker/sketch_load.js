@@ -41,7 +41,8 @@ function select_entry() {
       // a_data = sort_data();
     }
     day_next++;
-    a_string = a_date + '\n' + a_count + '\nUSA Death' + s + '\n' + a_postfix;
+    // a_string = a_date + '\n' + a_count + '\nUSA Death' + s + '\n' + a_postfix;
+    a_string = a_date + '\n' + a_count + '\n\n' + a_postfix;
   }
   end_index = a_string.length - 1;
   begin_day();
@@ -115,16 +116,18 @@ function select_entry() {
 //   console.log("mindex", mindex, "mdate", mdate, "mcount", mcount);
 // }
 
+// 2022-02-08 13:06:51
+//
 // 2020-04-16 4607 85
 // 2021-01-20 4442 364
 // 2021-01-12 4389 356
 // 2021-01-08 4189 352
+// 2022-02-04 4154 744 **
 // 2021-01-21 4137 365
 // 2021-01-27 4128 371
+// 2022-01-26 4068 735 **
 // 2021-01-07 4028 351
 // 2021-01-13 4018 357
-// 2021-01-26 3982 370
-// 2020-12-30 3933 343
 
 function prepare_data() {
   let ent0 = { Deaths: 0 };

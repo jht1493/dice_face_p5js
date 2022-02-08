@@ -11,6 +11,11 @@ function setup() {
   // parent.insertBefore(my_canvas.elt, title.elt);
   // create_ui();
   let_init();
+  // Initial pause
+  a_run = 0;
+  setTimeout(function () {
+    a_run = 1;
+  }, 2 * 1000);
   fresh_canvas();
   begin_day();
   load_json();
@@ -132,7 +137,8 @@ function draw_day_count() {
   // let th = textAscent() + textDescent() + textLeading();
   // th = pix_len * 1.5;
   let tw = textWidth(str);
-  let x = width - tw - 1;
+  // let x = width - tw - 1;
+  let x = 10;
   let y = height - 1;
   fill(0);
   rect(x, y - th, tw, th);

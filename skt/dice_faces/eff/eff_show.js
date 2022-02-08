@@ -34,9 +34,8 @@ class eff_show_pad {
   trigger_step() {
     if (!this.step_patch) return;
     let src = patch_index1(this.step_patch);
-    // console.log(  'eff_show_pad trigger_step src', src, 'src.patch_stepper', src && src.patch_stepper );
-    // console.log(  'eff_show_pad trigger_step src', src, 'src.patch_stepper', src.patch_stepper );
     if (src && src.patch_stepper) {
+      // console.log('eff_show_pad trigger_step step_patch', this.step_patch);
       src.patch_stepper();
     }
   }

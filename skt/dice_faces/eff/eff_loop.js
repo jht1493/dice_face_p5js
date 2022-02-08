@@ -16,7 +16,9 @@ class eff_loop {
     _freeze_patch: [0, 1],
     freeze_screen: [0, 1],
   };
-  static eff_names = [
+  static eff_names = ['show', 'sketchy'];
+  // show will trigger patch_stepper in face_mesh
+  static eff_namesXX = [
     'show',
     'delaunay',
     'sketchy',
