@@ -587,7 +587,7 @@ let a_settings = [
           }
         },
         "eff": {
-          "alpha": 255,
+          "alpha": 100,
           "points": 0,
           "points_size": 10,
           "points_color_offset": 0,

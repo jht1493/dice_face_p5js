@@ -1,5 +1,5 @@
 {
-  "setting": "9-data-slides",
+  "setting": "1-data-posenet",
   "back_color": 200,
   "room_name": "Dice-Play-1",
   "patch_layout": "2x1",
@@ -93,7 +93,7 @@
         }
       },
       "eff": {
-        "alpha": 255,
+        "alpha": 100,
         "points": 0,
         "points_size": 10,
         "points_color_offset": 0,
