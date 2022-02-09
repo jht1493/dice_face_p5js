@@ -39,15 +39,6 @@ class eff_tile_clock {
   }
   render() {
     this.check_patches();
-    // console.log('advancePending', this.advancePending, frameCount);
-    // console.log(
-    //   'this.wasFrozen',
-    //   this.wasFrozen,
-    //   'advancePending',
-    //   this.advancePending,
-    //   'got_freeze',
-    //   this.got_freeze
-    // );
     if (this.advancePending) {
       this.draw_step(1);
       if (this.center_only) {

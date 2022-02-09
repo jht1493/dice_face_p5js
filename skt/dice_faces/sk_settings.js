@@ -257,7 +257,9 @@ let a_settings = [
           "sticky": 1,
           "mask_index": 0,
           "avg_index": 1440,
-          "pixd_n": 8
+          "pixd_n": 8,
+          "draw_mod": 4,
+          "detect_max": 1
         }
       },
       {
@@ -304,7 +306,7 @@ let a_settings = [
           "center_draw": "pixd",
           "gray_back": 0,
           "center_only": 0,
-          "freeze_damp": 1
+          "freeze_damp": 30
         }
       }
     ],
