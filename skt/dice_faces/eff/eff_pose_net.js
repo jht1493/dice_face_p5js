@@ -249,7 +249,7 @@ class eff_pose_net {
   }
 }
 
-let a_alpha = 255;
+let a_alpha = 10;
 let dot_colors = [
   [0, 0, 0, a_alpha],
   [255, 255, 0, a_alpha],
