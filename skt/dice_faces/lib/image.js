@@ -40,7 +40,9 @@ function image_scaled_pad(img, pad, flush_right) {
   let iw = img.width;
   let ih = img.height;
   let rr = ih / iw;
-  if (rr < 1) {
+  if (ph == ih) {
+    // If pad height matches image don't scale - for data-posenet
+  } else if (rr < 1) {
     ph = pw * rr;
   } else {
     pw = ph / rr;

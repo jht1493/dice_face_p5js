@@ -570,7 +570,7 @@ let a_settings = [
           "peg_width": 1,
           "export_on": 0,
           "iimage": 37,
-          "label_align": "right",
+          "label_align": "left",
           "image_align": "center"
         }
       },

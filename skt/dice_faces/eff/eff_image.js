@@ -1,16 +1,6 @@
 class eff_image_show {
   static meta_props = {
-    group: [
-      'group',
-      'fmfm',
-      'fema',
-      'male',
-      'group',
-      'graph',
-      'other',
-      'test',
-      'jht',
-    ],
+    group: ['group', 'fmfm', 'fema', 'male', 'group', 'graph', 'other', 'test', 'jht'],
     next: {
       button: (ent, aPatch) => {
         ent.next_action(aPatch);
@@ -113,12 +103,7 @@ class eff_image_show {
   }
   show_image() {
     if (!this.zoomed) {
-      layer_image_scaled_pad(
-        this.output,
-        this.img,
-        this.isrc.pad,
-        this.align_center
-      );
+      layer_image_scaled_pad(this.output, this.img, this.isrc.pad, this.align_center);
       // this.output = this.img;
     } else {
       this.show_zoomed(this.img, this.isrc.pad);
@@ -256,8 +241,7 @@ class eff_image_show {
   next_action(aPatch) {
     if (!aPatch.eff.iimage) aPatch.eff.iimage = 0;
     aPatch.eff.iimage = (aPatch.eff.iimage + 1) % this.images.length;
-    if (aPatch.eff.iimage < 0 || aPatch.eff.iimage >= this.images.length - 1)
-      aPatch.eff.iimage = 0;
+    if (aPatch.eff.iimage < 0 || aPatch.eff.iimage >= this.images.length - 1) aPatch.eff.iimage = 0;
     ui_patch_update(aPatch);
   }
   previous_action(aPatch) {
@@ -302,18 +286,8 @@ class eff_image_show {
     let ipath = '../assets/webdb/' + image_name;
     loadImage(ipath, (img) => {
       console.log('eff_image_show img.width', img.width, 'height', img.height);
-      console.log(
-        'eff_image_show output width',
-        this.output.width,
-        'height',
-        this.output.height
-      );
-      console.log(
-        'eff_image_show pad width',
-        this.isrc.pad.width,
-        'height',
-        this.isrc.pad.height
-      );
+      console.log('eff_image_show output width', this.output.width, 'height', this.output.height);
+      console.log('eff_image_show pad width', this.isrc.pad.width, 'height', this.isrc.pad.height);
 
       if (this.zoomed) {
         this.zscale = img.width / this.isrc.pad.width;
