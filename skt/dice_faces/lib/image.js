@@ -76,6 +76,7 @@ function layer_image_scaled_pad(layer, img, pad, align_center) {
     }
   }
   // console.log('layer iw', iw, 'ih', ih, 'pw', pw, 'ph', ph);
+  layer.clear();
   layer.image(img, dx, dy, pw, ph, 0, 0, iw, ih);
 }
 

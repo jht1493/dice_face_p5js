@@ -1,6 +1,7 @@
 class eff_pose_net {
   static meta_props = {
     alpha: [255, 230, 180, 100, 10],
+    ndetect: [4, 1, 2, 3],
     _points: [0, 1],
     points_size: [10, 20, 30, 40],
     points_color_offset: [0, 1, 2, 3],
@@ -25,7 +26,8 @@ class eff_pose_net {
     this.video = this.input.elt;
     this.poses = [];
     ui_message('loading model...');
-    this.poseNet = ml5.poseNet(this.video, function () {
+    let options = { flipHorizontal: 1, maxPoseDetections: this.ndetect };
+    this.poseNet = ml5.poseNet(this.video, options, function () {
       // console.log('eff_pose_net Model ready!');
       ui_message('');
     });
@@ -70,7 +72,8 @@ class eff_pose_net {
 
     let dx = x2 - x1;
     let dy = y2 - y1;
-    let a = atan2(dy, dx);
+    // + Math.PI needed for lipHorizontal: 1
+    let a = atan2(dy, dx) + Math.PI;
 
     let x3 = x1 + dx / 2;
     let y3 = y1 + dy / 2;
