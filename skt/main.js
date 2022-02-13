@@ -110,7 +110,10 @@ app.whenReady().then(() => {
   const url_options = { query: { u: opt.u, s: opt.s } };
   mainWindow.loadFile('dice_faces/index.html', url_options);
 
-  mainWindow.fullScreen = opt.fullScreen;
+  // mainWindow.fullScreen = opt.fullScreen;
+  setTimeout(function () {
+    mainWindow.fullScreen = opt.fullScreen;
+  }, 10 * 1000);
 
   setup_download();
 
@@ -189,37 +192,34 @@ function parse_restart_time(restart_time) {
 }
 
 function setup_download() {
-  mainWindow.webContents.session.on(
-    'will-download',
-    (event, item, webContents) => {
-      // Set the save path, making Electron not to prompt a save dialog.
-      let fn = item.getFilename();
-      // console.log('fn', fn);
-      let dpath = next_download_filename(fn);
-      // let dpath = path.join(download_path, fn);
-      console.log('dpath', dpath);
-      item.setSavePath(dpath);
-      // item.setSavePath('/tmp/save.png');
-      item.on('updated', (event, state) => {
-        if (state === 'interrupted') {
-          console.log('Download is interrupted but can be resumed');
-        } else if (state === 'progressing') {
-          if (item.isPaused()) {
-            console.log('Download is paused');
-          } else {
-            // console.log(`Received bytes: ${item.getReceivedBytes()}`);
-          }
-        }
-      });
-      item.once('done', (event, state) => {
-        if (state === 'completed') {
-          // console.log('Download successfully');
+  mainWindow.webContents.session.on('will-download', (event, item, webContents) => {
+    // Set the save path, making Electron not to prompt a save dialog.
+    let fn = item.getFilename();
+    // console.log('fn', fn);
+    let dpath = next_download_filename(fn);
+    // let dpath = path.join(download_path, fn);
+    console.log('dpath', dpath);
+    item.setSavePath(dpath);
+    // item.setSavePath('/tmp/save.png');
+    item.on('updated', (event, state) => {
+      if (state === 'interrupted') {
+        console.log('Download is interrupted but can be resumed');
+      } else if (state === 'progressing') {
+        if (item.isPaused()) {
+          console.log('Download is paused');
         } else {
-          console.log(`Download failed: ${state}`);
+          // console.log(`Received bytes: ${item.getReceivedBytes()}`);
         }
-      });
-    }
-  );
+      }
+    });
+    item.once('done', (event, state) => {
+      if (state === 'completed') {
+        // console.log('Download successfully');
+      } else {
+        console.log(`Download failed: ${state}`);
+      }
+    });
+  });
 }
 
 function next_download_filename(fn) {
