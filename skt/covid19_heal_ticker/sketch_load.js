@@ -41,8 +41,8 @@ function select_entry() {
       // a_data = sort_data();
     }
     day_next++;
-    // a_string = a_date + '\n' + a_count + '\nUSA Death' + s + '\n' + a_postfix;
-    a_string = a_date + '\n' + a_count + '\n\n' + a_postfix;
+    a_string = a_date + '\n' + a_count + '\n\nUSA Death' + s + '\n' + a_postfix;
+    // a_string = a_date + '\n' + a_count + '\n\n' + a_postfix;
   }
   end_index = a_string.length - 1;
   begin_day();
