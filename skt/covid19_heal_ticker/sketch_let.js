@@ -49,8 +49,8 @@ let dot_y;
 let dot_count;
 // let dot_colors = ['gray', 'lightgray'];
 let dot_colors = [
-  [211, 211, 211, 255],
   [128, 128, 128, 255],
+  [211, 211, 211, 255],
 ];
 let dot_cindex = 0;
 let panel_right, panel_width, panel_top, panel_height;
@@ -89,8 +89,7 @@ function let_init() {
   dot_y = 0;
   dot_count = 0;
   dot_count_total = 0;
-  dot_panel_max =
-    Math.floor(panel_width / pix_len) * Math.floor(panel_height / pix_len);
+  dot_panel_max = Math.floor(panel_width / pix_len) * Math.floor(panel_height / pix_len);
   cycle_start_time = millis();
   a_state = 'draw_bit';
   a_paused = 0;
