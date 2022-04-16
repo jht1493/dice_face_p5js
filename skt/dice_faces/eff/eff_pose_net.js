@@ -72,7 +72,7 @@ class eff_pose_net {
 
     let dx = x2 - x1;
     let dy = y2 - y1;
-    // + Math.PI needed for lipHorizontal: 1
+    // + Math.PI needed for flipHorizontal: 1
     let a = atan2(dy, dx) + Math.PI;
 
     let x3 = x1 + dx / 2;
