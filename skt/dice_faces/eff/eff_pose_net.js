@@ -8,6 +8,8 @@ class eff_pose_net {
     _skel: [0, 1],
     skel_weight: [1, 5, 10, 20],
     skel_color_offset: [0, 1, 2, 3],
+    hflip: [1, 0],
+    show_head: [1, 0],
   };
   constructor(props) {
     Object.assign(this, props);
@@ -26,7 +28,7 @@ class eff_pose_net {
     this.video = this.input.elt;
     this.poses = [];
     ui_message('loading model...');
-    let options = { flipHorizontal: 1, maxPoseDetections: this.ndetect };
+    let options = { flipHorizontal: this.hflip, maxPoseDetections: this.ndetect };
     this.poseNet = ml5.poseNet(this.video, options, function () {
       // console.log('eff_pose_net Model ready!');
       ui_message('');
@@ -73,7 +75,8 @@ class eff_pose_net {
     let dx = x2 - x1;
     let dy = y2 - y1;
     // + Math.PI needed for flipHorizontal: 1
-    let a = atan2(dy, dx) + Math.PI;
+    let a = atan2(dy, dx);
+    if (this.hflip) a += Math.PI;
 
     let x3 = x1 + dx / 2;
     let y3 = y1 + dy / 2;
@@ -87,7 +90,9 @@ class eff_pose_net {
     translate(x3, y3);
     rotate(a);
 
-    ellipse(0, -2 * h, fw, fh);
+    if (this.show_head) {
+      ellipse(0, -2 * h, fw, fh);
+    }
 
     let x4 = 0 - w;
     let y4 = 0 - h;

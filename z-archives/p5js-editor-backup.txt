@@ -1,0 +1,10 @@
+# p5js editor backup
+
+## Produce listing for sketches and collections
+
+
+node nod/asketches_list.js
+
+node nod/acollection_list.js
+
+
