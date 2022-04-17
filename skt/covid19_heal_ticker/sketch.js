@@ -120,7 +120,7 @@ function draw_progress() {
 function draw_day_count() {
   // str = 'day ' + data_index + '/' + a_data.length + ' ';
   // let str = 'DAY ' + data_index + ' of ' + a_data.length;
-  let str = 'USA DEATHS - DAY ' + data_index + ' of ' + a_data.length;
+  let str = 'USA COVID DEATHS - DAY ' + data_index + ' of ' + a_data.length;
   str += ' - TOTAL DEATHS ' + a_data[a_data.length - 1].Deaths;
   // console.log('draw_day_count ', str);
   let th = pix_len * 1.5;
@@ -129,8 +129,8 @@ function draw_day_count() {
   // th = pix_len * 1.5;
   let tw = textWidth(str);
   // let x = width - tw - 1;
-  let x = 0;
-  let y = height - 2;
+  let x = 1;
+  let y = height - 3;
   fill(0);
   rect(x, y - th, tw, th);
   fill('white');
