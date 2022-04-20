@@ -1,4 +1,18 @@
 let a_images = {
+  "covid19m": [
+    "The COVID - 19 MEMORIAL TICKER (0).png",
+    "The COVID - 19 MEMORIAL TICKER (1).png",
+    "The COVID - 19 MEMORIAL TICKER (2).png",
+    "The COVID - 19 MEMORIAL TICKER (3).png",
+    "The COVID - 19 MEMORIAL TICKER (4).png",
+    "The COVID - 19 MEMORIAL TICKER (5).png",
+    "The COVID - 19 MEMORIAL TICKER (6).png",
+    "The COVID - 19 MEMORIAL TICKER (7).png"
+  ],
+  "covid19mov": [
+    "Document_Ticker-short-h.mov",
+    "MadibaViolaCello-h.mov"
+  ],
   "fema": [
     "212.jpg",
     "216.jpg",

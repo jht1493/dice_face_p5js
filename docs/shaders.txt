@@ -1,0 +1,56 @@
+shaders.txt
+
+https://itp-xstory.github.io/p5js-shaders/#/
+
+https://itp-xstory.github.io/p5js-shaders/#/./docs/examples/shadertoy
+
+https://github.com/aferriss/p5jsShaderExamples
+
+https://aferriss.github.io/p5jsShaderExamples/4_image-effects/4-19_slitscan/
+
+https://aferriss.github.io/p5jsShaderExamples/4_image-effects/4-4_mirror/
+
+https://aferriss.github.io/p5jsShaderExamples/4_image-effects/4-5_stripes-from-image/
+
+https://aferriss.github.io/p5jsShaderExamples/4_image-effects/4-6_pixelate/
+
+https://aferriss.github.io/p5jsShaderExamples/4_image-effects/4-7_displacement-map/
+
+https://aferriss.github.io/p5jsShaderExamples/4_image-effects/4-12_threshold/
+
+https://aferriss.github.io/p5jsShaderExamples/4_image-effects/4-13_frame-differencing/
+
+https://aferriss.github.io/p5jsShaderExamples/4_image-effects/4-17_delay/
+
+https://aferriss.github.io/p5jsShaderExamples/4_image-effects/4-18_discard/
+
+https://aferriss.github.io/p5jsShaderExamples/4_image-effects/4-20_mosaic/
+
+https://aferriss.github.io/p5jsShaderExamples/6_3d/6-1_rectangle/
+
+https://aferriss.github.io/p5jsShaderExamples/6_3d/6-2_vertexDisplacement/
+
+https://aferriss.github.io/p5jsShaderExamples/6_3d/6-3_vertexDisplacementFromTexture/
+
+# --
+
+https://amf.fyi/About
+
+https://pixlpa.com/filler/
+
+https://pixlpa.com/
+
+# --
+
+https://itp-xstory.github.io/p5js-shaders/#/./docs/continue-learning
+
+https://openprocessing.org/sketch/1471542
+Curl Voronoi by sayo 
+
+https://openprocessing.org/sketch/1104958
+Brush Drawing 2
+
+https://openprocessing.org/sketch/1469801
+Distance Function
+
+

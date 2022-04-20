@@ -1,10 +1,11 @@
-let a_app_ver = 'Dice?v=341 ';
+let a_app_ver = 'Dice?v=348 ';
 let a_store_ver = '192';
 let a_store_name = 'Store-A';
 let a_store_prefix = '';
 let a_effects = [
   { label: 'show', eff: eff_show_pad },
   { label: 'none', eff: eff_show_none },
+  { label: 'mov', eff: eff_mov_show },
   { label: 'loop', eff: eff_loop },
   { label: 'tile_clock', eff: eff_tile_clock },
   { label: 'tile', eff: eff_tile },

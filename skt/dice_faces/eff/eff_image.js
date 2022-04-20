@@ -1,6 +1,6 @@
 class eff_image_show {
   static meta_props = {
-    group: ['group', 'fmfm', 'fema', 'male', 'group', 'graph', 'other', 'test', 'jht'],
+    group: ['group', 'fmfm', 'fema', 'male', 'group', 'graph', 'other', 'test', 'jht', 'covid19m'],
     next: {
       button: (ent, aPatch) => {
         ent.next_action(aPatch);
@@ -100,6 +100,11 @@ class eff_image_show {
     this.pan_check();
     this.show_image();
     this.face_render();
+  }
+  init() {
+    this.predictions = [];
+    this.period_timer = new period_timer(this.period);
+    this.load_image();
   }
   show_image() {
     if (!this.zoomed) {
@@ -253,11 +258,6 @@ class eff_image_show {
   reset_action(aPatch) {
     delete aPatch.iimage;
     ui_patch_update(aPatch);
-  }
-  init() {
-    this.predictions = [];
-    this.period_timer = new period_timer(this.period);
-    this.load_image();
   }
   period_next() {
     if (!this.iimage) this.iimage = 0;

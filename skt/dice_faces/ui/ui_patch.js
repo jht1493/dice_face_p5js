@@ -101,14 +101,17 @@ function ui_patch_update(aPatch) {
   if (!aPatch) return;
   let ipatch = aPatch.isrc.ipatch;
   // console.log('ui_patch_update ipatch', ipatch);
+  let inst = a_patch_instances[ipatch];
+  // console.log('ui_patch_update inst', inst);
+  if (inst && inst.remove_eff) {
+    inst.remove_eff();
+  }
   a_patch_instances[ipatch] = null;
 }
 
 function pad_layout_update() {
   let layout;
-  console.log(
-    'pad_layout_update a_ui.canvas_resize_ref |' + a_ui.canvas_resize_ref + '|'
-  );
+  console.log('pad_layout_update a_ui.canvas_resize_ref |' + a_ui.canvas_resize_ref + '|');
   if (a_ui.canvas_resize_ref) {
     pads_resize_set_scale();
   } else {
@@ -132,12 +135,7 @@ function pad_layout_update() {
         pads_resize_pad(pad);
       } else {
         // !!@ Error no pad_ref
-        console.log(
-          '!!@ pad_layout_update pad_ref missing ipatch',
-          ipatch,
-          'uiPatch',
-          JSON.stringify(uiPatch)
-        );
+        console.log('!!@ pad_layout_update pad_ref missing ipatch', ipatch, 'uiPatch', JSON.stringify(uiPatch));
       }
       isrc.pad = pad;
       pads_count++;
@@ -153,10 +151,7 @@ function pads_resize_set_scale() {
   let refsz = str_to_width_height(a_ui.canvas_resize_ref);
   let tosz = str_to_width_height(a_ui.canvas_size);
   a_ui.pads_scale = tosz.width / refsz.width;
-  console.log(
-    'pads_resize_set_scale a_ui.canvas_resize_ref',
-    a_ui.canvas_resize_ref
-  );
+  console.log('pads_resize_set_scale a_ui.canvas_resize_ref', a_ui.canvas_resize_ref);
   console.log('pads_resize_set_scale a_ui.canvas_size', a_ui.canvas_size);
   console.log('pads_resize_set_scale pads_scale', a_ui.pads_scale);
 }
