@@ -1,6 +1,6 @@
 class eff_mov_show {
   static meta_props = {
-    group: ['covid19mov'],
+    group: ['covid19mov', '370-mov'],
     ifile: [0, 1],
     ispeed: [1],
     next: {
@@ -23,6 +23,7 @@ class eff_mov_show {
   };
   constructor(props) {
     Object.assign(this, props);
+    this.file_name = 'covid19mov/Document_Ticker-short-h.mov';
     this.init();
   }
   render() {
@@ -53,17 +54,17 @@ class eff_mov_show {
     }
     let ipath = '../assets/webdb/' + file_name;
     console.log('eff_mov_show ipath=' + ipath);
-    console.log('eff_mov_show vid', this.vid);
+    // console.log('eff_mov_show vid', this.vid);
     this.vid = createVideo(ipath, () => {
       console.log('eff_mov_show loaded');
       this.vid.play();
       // this.vid.loop();
     });
     this.vid.onended(() => {
+      // Chrome fails to play in reverse
       // this.ispeed = this.ispeed == 1 ? -1 : 1;
       console.log('eff_mov_show onended', this.ispeed);
       this.vid.play();
-      // this.vid.speed(this.ispeed);
     });
     this.vid.size(width, height);
     this.vid.position(0, 0);
@@ -73,5 +74,17 @@ class eff_mov_show {
     if (this.vid) {
       this.vid.remove();
     }
+  }
+  next_action(aPatch) {
+    if (!aPatch.eff.ifile) aPatch.eff.ifile = 0;
+    aPatch.eff.ifile = (aPatch.eff.ifile + 1) % this.files.length;
+    // if (aPatch.eff.ifile < 0 || aPatch.eff.ifile >= this.files.length - 1) aPatch.eff.ifile = 0;
+    ui_patch_update(aPatch);
+  }
+  previous_action(aPatch) {
+    if (!aPatch.eff.ifile) aPatch.eff.ifile = 0;
+    aPatch.eff.ifile--;
+    if (aPatch.eff.ifile < 0) aPatch.eff.ifile = this.files.length - 1;
+    ui_patch_update(aPatch);
   }
 }

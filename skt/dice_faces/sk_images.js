@@ -1,4 +1,23 @@
 let a_images = {
+  "370-img": [
+    "IMG_1288.JPG",
+    "IMG_1289.JPG",
+    "IMG_1290.JPG",
+    "IMG_1292.JPG",
+    "IMG_1293.JPG",
+    "IMG_1295.JPG",
+    "IMG_E1288.JPG",
+    "IMG_E1289.JPG",
+    "IMG_E1290.JPG",
+    "IMG_E1292.JPG",
+    "IMG_E1293.JPG",
+    "IMG_E1295.JPG"
+  ],
+  "370-mov": [
+    "IMG_1294.MOV",
+    "IMG_1296.MOV",
+    "IMG_1297.MOV"
+  ],
   "covid19m": [
     "The COVID - 19 MEMORIAL TICKER (0).png",
     "The COVID - 19 MEMORIAL TICKER (1).png",
@@ -383,6 +402,9 @@ let a_images = {
     "488.jpg",
     "551.jpg",
     "553.jpg"
+  ],
+  "screens": [
+    "Screens-Club.png"
   ],
   "test": [
     "fac.png"

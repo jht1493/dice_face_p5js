@@ -1,6 +1,21 @@
+let g_image_groups = [
+  'group',
+  'fmfm',
+  'fema',
+  'male',
+  'group',
+  'graph',
+  'other',
+  'test',
+  'jht',
+  'covid19m',
+  '370-img',
+  'screens',
+];
+
 class eff_image_show {
   static meta_props = {
-    group: ['group', 'fmfm', 'fema', 'male', 'group', 'graph', 'other', 'test', 'jht', 'covid19m'],
+    group: g_image_groups,
     next: {
       button: (ent, aPatch) => {
         ent.next_action(aPatch);
@@ -246,13 +261,13 @@ class eff_image_show {
   next_action(aPatch) {
     if (!aPatch.eff.iimage) aPatch.eff.iimage = 0;
     aPatch.eff.iimage = (aPatch.eff.iimage + 1) % this.images.length;
-    if (aPatch.eff.iimage < 0 || aPatch.eff.iimage >= this.images.length - 1) aPatch.eff.iimage = 0;
+    // if (aPatch.eff.iimage < 0 || aPatch.eff.iimage >= this.images.length - 1) aPatch.eff.iimage = 0;
     ui_patch_update(aPatch);
   }
   previous_action(aPatch) {
     if (!aPatch.eff.iimage) aPatch.eff.iimage = 0;
     aPatch.eff.iimage--;
-    if (aPatch.eff.iimage < 0) aPatch.eff.iimage = this.images.length - 1;
+    // if (aPatch.eff.iimage < 0) aPatch.eff.iimage = this.images.length - 1;
     ui_patch_update(aPatch);
   }
   reset_action(aPatch) {

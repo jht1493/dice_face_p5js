@@ -1,6 +1,6 @@
 class eff_bestill {
   static meta_props = {
-    factor: [10, 1, 5, 10, 50, 100, 200, 500, 1000, 2000, 3000, 5000, 10000],
+    factor: [10, 1, 5, 10, 20, 40, 50, 100, 200, 500, 1000, 2000, 3000, 5000, 10000],
     mirror: [0, 1],
   };
   constructor(props) {
