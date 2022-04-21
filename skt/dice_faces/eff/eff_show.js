@@ -1,7 +1,8 @@
 class eff_show_pad {
   static meta_props = {
     // show: [1, 0],
-    step_patch: [1, 0],
+    // step_patch: [1, 0],
+    step_patch: [0, 1],
     next: {
       button: (ent, aPatch) => {
         ent.trigger_step(aPatch);

@@ -66,7 +66,7 @@ class eff_face_mesh {
     });
   }
   patch_stepper() {
-    // console.log('eff_face_mesh patch_stepper', this.draw_index, '', this.draw);
+    console.log('eff_face_mesh patch_stepper', this.draw_index, '', this.draw);
     this.draw_index = (this.draw_index + 1) % this.draw_mod;
     this.draw = this.constructor.meta_props.draw[this.draw_index];
     // console.log('eff_face_mesh draw_index', this.draw_index, '', this.draw);
