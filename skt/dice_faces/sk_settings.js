@@ -233,7 +233,7 @@ let a_settings = [
     "patch_layout": "Single",
     "canvas_size": "640x480",
     "capture_size": "320x240",
-    "chat_name": "jht",
+    "chat_name": "face",
     "chat_chk": 0,
     "live_index": 0,
     "live_chk": 1,
@@ -309,7 +309,7 @@ let a_settings = [
     "patch_layout": "Single",
     "canvas_size": "960x540",
     "capture_size": "320x240",
-    "chat_name": "jht",
+    "chat_name": "tile",
     "chat_chk": 0,
     "live_index": 0,
     "live_chk": 1,
@@ -329,7 +329,8 @@ let a_settings = [
         "eff": {
           "ncell": 5,
           "period": 3,
-          "freeze_patch": 0
+          "freeze_patch": 0,
+          "livem_cycle": 1
         }
       }
     ],

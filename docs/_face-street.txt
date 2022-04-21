@@ -1,5 +1,45 @@
 _face-street.txt
 
+dice_faces/index.html?s=0-face-live
+http://127.0.0.1:5501/skt/dice_faces/index.html?s=0-face-live
+https://jht1493.net/a1/skt/dice_faces?s=0-face-live
+
+dice_faces/index.html?s=0-face-tile&h=0
+http://127.0.0.1:5501/skt/dice_faces/index.html?s=0-face-tile&h=0
+https://jht1493.net/a1/skt/dice_faces?s=0-face-tile&h=0
+
+a_media_devices
+
+a_media_panes
+
+  create_media_pane(device, default_vis);
+
+  let isrc = uiPatch.isrc;
+  let { effect, imedia } = isrc;
+
+  let media = a_media_panes[imedia];
+
+    let input = media.capture;
+    let init = { isrc, input, media };
+    init = Object.assign(init, uiPatch.eff);
+    inst = new aeff.eff(init);
+    a_patch_instances[ipatch] = inst;
+
+
+gotStream id
+
+  a_media_panes = a_media_panes.filter((item) => item.id !== id);
+  // console.log('remove_media_by_id id=', id, 'a_media_panes', a_media_panes);
+  tile_notify_media_update();
+
+
+function gotDisconnect(id) {
+
+  remove_media_pane(id);
+
+  remove_media_by_id(id);
+
+
 
 gotDisconnect id j2hsx2knQzqYM3RbAABN
 ui_chat.js?v=351:50 ui_chat_receive 
@@ -25,6 +65,3 @@ function ui_refresh() {
 let default_vis = 1;
 
 
-dice_faces/index.html?s=0-face-live
-
-dice_faces/index.html?s=0-face-tile&h=0

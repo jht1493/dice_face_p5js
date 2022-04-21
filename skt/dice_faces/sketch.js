@@ -39,19 +39,27 @@ function draw_patch(ipatch, prior) {
   let aeff = effect_label(effect);
   let media = a_media_panes[imedia];
   if (!media) {
-    return;
-  }
-  if (!media.ready()) {
+    console.log('NO media imedia', imedia);
+  } else if (!media.ready()) {
+    console.log('NOT media.ready imedia', imedia);
     return;
   }
   let inst = a_patch_instances[ipatch];
   if (!inst) {
+    if (!media) {
+      console.log('NO media for init imedia', imedia);
+      return;
+    }
     let input = media.capture;
     let init = { isrc, input, media };
     init = Object.assign(init, uiPatch.eff);
     inst = new aeff.eff(init);
     a_patch_instances[ipatch] = inst;
     mouse_event_check(inst);
+  } else if (media) {
+    // !!@ tile
+    inst.media = media;
+    inst.input = media.capture;
   }
   if (isrc.ipipe && prior && prior.output) {
     // players must use the current value of .input

@@ -1,5 +1,9 @@
 let a_media_panes = [];
 // { imedia, device, id, label, div, chk, vis, capture, info, ready }
+// 0: canvas
+// 1: first local device
+// 2: livem device for self
+// 3: livem device for others ...
 
 function create_media_pane(device, vis_in) {
   let capture = device.capture;
@@ -74,6 +78,8 @@ function find_media_by_id(id) {
 
 function remove_media_by_id(id) {
   a_media_panes = a_media_panes.filter((item) => item.id !== id);
+  // console.log('remove_media_by_id id=', id, 'a_media_panes', a_media_panes);
+  tile_notify_media_update({ remove: id });
 }
 
 function remove_media_panes() {
@@ -88,7 +94,7 @@ function remove_media_pane(id) {
   // console.log('remove_media_pane id=', id, !id);
   // Remove the div associated with id
   let ent = find_media_by_id(id);
-  // console.log('remove_media_pane ent', ent);
+  console.log('remove_media_pane ent', ent);
   if (ent) {
     ent.div.remove();
     ent.capture.remove();

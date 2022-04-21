@@ -59,6 +59,7 @@ function gotStream(capture, id) {
   ui_refresh();
   console.log('gotStream width', capture.width, 'height', capture.height);
   livem_send('Hello');
+  tile_notify_media_update({ add: id });
 }
 
 // loadedmetadata

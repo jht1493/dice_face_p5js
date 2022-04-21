@@ -13,15 +13,22 @@ class eff_tile {
       },
     },
     _freeze_patch: [0, 1],
+    livem_cycle: [0, 1],
   };
   constructor(props) {
     Object.assign(this, props);
     this.init();
+    tile_inst = this;
   }
   render() {
     this.check_patches();
     if (this.advancePending) {
-      this.draw_step();
+      if (this.livem_cycle) {
+        this.livem_step();
+      } else {
+        this.draw_step();
+      }
+      // this.draw_step();
       // this.trigger_index = (this.trigger_index + 1) % this.trigger_count;
       this.advancePending = 0;
     }
@@ -41,12 +48,26 @@ class eff_tile {
         this.advancePending = 1;
       }
     });
+    this.check_tile_op_que();
   }
-  next_action(aPatch) {
-    this.draw_step();
-  }
-  previous_action(aPatch) {
-    this.draw_step(-1);
+  livem_step() {
+    if (!this.livem_cycle) return;
+    let ipatch = this.isrc.ipatch;
+    console.log('livem_step ipatch', ipatch);
+    let uiPatch = a_ui.patches[ipatch];
+    let imedia = uiPatch.isrc.imedia;
+    if (imedia >= a_media_panes.length) {
+      imedia = 2;
+    }
+    imedia = (imedia + 1) % a_media_panes.length;
+    if (imedia < 2) imedia = 2;
+    if (imedia >= a_media_panes.length) imedia = uiPatch.isrc.imedia;
+    console.log('livem_step old imedia', uiPatch.isrc.imedia, 'new', imedia);
+    let change = uiPatch.isrc.imedia !== imedia;
+    uiPatch.isrc.imedia = imedia;
+    if (change) {
+      this.draw_step();
+    }
   }
   init() {
     this.wasFrozen = 0;
@@ -99,24 +120,14 @@ class eff_tile {
   }
   src_image() {
     return this.input;
-    // let simg = this.src_layer || get();
-    // return simg;
   }
-  // trigger_step() {
-  //   if (!this.step_patch) return;
-  //   let src = patch_index1(this.step_patch);
-  //   if (src) {
-  //     src.step_patch();
-  //   }
-  // }
+  next_action(aPatch) {
+    this.draw_step();
+  }
+  previous_action(aPatch) {
+    this.draw_step(-1);
+  }
   check_patches() {
-    // this.src_layer = null;
-    // if (this.src_patched) {
-    //   let src = patch_index1(this.src_patched);
-    //   if (src) {
-    //     this.src_layer = src.output;
-    //   }
-    // }
     if (this.freeze_patch) {
       let src = patch_index1(this.freeze_patch);
       if (src) {
@@ -147,4 +158,25 @@ class eff_tile {
     dimg.copy(this.output, sx, sy, xstep, ystep, 0, 0, dimg.width, dimg.height);
     // this.got_freeze = this.iperiod;
   }
+  check_tile_op_que() {
+    // tile_op_que
+    let opt = tile_op_que.splice(0, 1);
+    if (opt.length < 1) return;
+    let op = opt[0];
+    console.log('check_tile_op_que op', op);
+  }
+}
+
+let tile_op_que = [];
+let tile_inst;
+
+// opt={add:id}
+// opt={remove:id}
+//
+function tile_notify_media_update(opt) {
+  console.log('tile_inst opt', opt);
+  console.log('tile_inst tile_inst', tile_inst);
+  console.log('tile_notify_media_update a_media_panes', a_media_panes);
+  console.log('tile_notify_media_update a_media_devices', a_media_devices);
+  tile_op_que.push(opt);
 }
