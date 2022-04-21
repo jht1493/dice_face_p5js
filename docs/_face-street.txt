@@ -1,0 +1,30 @@
+_face-street.txt
+
+
+gotDisconnect id j2hsx2knQzqYM3RbAABN
+ui_chat.js?v=351:50 ui_chat_receive 
+
+p5livemedia.js:365 Error: Connection failed.
+    at a (simplepeer.min.js:6:78044)
+    at p._onConnectionStateChange (simplepeer.min.js:6:88776)
+    at RTCPeerConnection._pc.onconnectionstatechange (simplepeer.min.js:6:80358)
+
+# --
+
+function store_restore_settings() {
+  a_ui = a_settings_pending;
+  let delay = 5000;
+  setTimeout(ui_hide, delay);
+
+
+let a_settings_pending; // url params s= will set
+let a_hideui = 0; // Default is to hide using with s= settings
+
+function ui_refresh() {
+
+let default_vis = 1;
+
+
+dice_faces/index.html?s=0-face-live
+
+dice_faces/index.html?s=0-face-tile&h=0

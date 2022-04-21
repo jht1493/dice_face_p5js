@@ -1,4 +1,4 @@
-let a_app_ver = 'Dice?v=349 ';
+let a_app_ver = 'Dice?v=351 ';
 let a_store_ver = '192';
 let a_store_name = 'Store-A';
 let a_store_prefix = '';
@@ -58,4 +58,6 @@ let a_ui = {
 };
 let a_patch_instances = [];
 let a_canvas_size_lock = 0;
-let a_settings_pending;
+
+let a_settings_pending; // url params s= will set
+let a_hideui = 0; // Default is to hide using with s= settings

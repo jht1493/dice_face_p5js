@@ -1,12 +1,13 @@
 let a_media_devices = [];
 // { label, deviceId, capture, stream }
 
-let default_vis = 1;
+// let default_vis = 1;
 
 function create_media_devices() {
+  let default_vis = !a_hideui;
   for (let ent of a_media_devices) {
     init_device_capture(ent);
-    create_media_pane(ent);
+    create_media_pane(ent, default_vis);
   }
   ui_refresh();
 

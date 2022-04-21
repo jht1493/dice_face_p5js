@@ -34,7 +34,9 @@ function store_restore_a_ui() {
 function store_restore_settings() {
   a_ui = a_settings_pending;
   let delay = 5000;
-  setTimeout(ui_hide, delay);
+  if (a_hideui) {
+    setTimeout(ui_hide, delay);
+  }
 }
 
 function store_restore_store_get() {

@@ -23,9 +23,7 @@ function attach_livem(ent) {
     return;
   }
   // console.log('attach_livem this=', this);
-  console.log(
-    'attach_livem type=' + type + ' a_ui.room_name=' + a_ui.room_name
-  );
+  console.log('attach_livem type=' + type + ' a_ui.room_name=' + a_ui.room_name);
   livem = new p5LiveMedia(this, type, stream, a_ui.room_name);
   if (!a_livem) {
     livem.on('stream', gotStream);
@@ -56,7 +54,8 @@ function gotStream(capture, id) {
   let stream = capture.elt.srcObject;
   let deviceId = id;
   let device = { deviceId, capture, stream };
-  create_media_pane(device);
+  let default_vis = !a_hideui;
+  create_media_pane(device, default_vis);
   ui_refresh();
   console.log('gotStream width', capture.width, 'height', capture.height);
   livem_send('Hello');

@@ -23,6 +23,11 @@ function store_url_check() {
       let ent = a_settings.find((ent) => ent.setting === s_str);
       a_settings_pending = ent;
       console.log('store_url_check a_settings_pending', a_settings_pending);
+      a_hideui = 1;
+    }
+    let h_str = params['h'];
+    if (h_str) {
+      a_hideui = parseFloat(h_str);
     }
   }
   return afound;

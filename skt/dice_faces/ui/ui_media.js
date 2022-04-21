@@ -1,18 +1,21 @@
 let a_media_panes = [];
 // { imedia, device, id, label, div, chk, vis, capture, info, ready }
 
-function create_media_pane(device) {
+function create_media_pane(device, vis_in) {
   let capture = device.capture;
   let id = device.deviceId;
   let label = device.label;
   if (!label) label = id;
-  // let vis = default_vis;
   let imedia = a_media_panes.length;
-  let vis = ui_media_default_vis(imedia);
+  let vis = ui_media_default_vis(imedia, vis_in);
 
   // Can't re-parent capture, so move div before it
   let div = createDiv();
   capture.elt.parentNode.insertBefore(div.elt, capture.elt);
+
+  if (a_hideui) {
+    div.hide();
+  }
 
   let chk = createCheckbox('View', vis);
   chk.style('display:inline');
@@ -48,9 +51,7 @@ function create_media_pane(device) {
     if (ent.nlabel) {
       label = '[' + ent.nlabel + '] ' + ent.label;
     }
-    info.html(
-      ' ' + label + ' width=' + capture.width + ' height=' + capture.height
-    );
+    info.html(' ' + label + ' width=' + capture.width + ' height=' + capture.height);
     capture.style(ent.vis ? 'display:inline' : 'display:none');
   }
   update_info();
@@ -116,8 +117,8 @@ function init_media_panes() {
   ];
 }
 
-function ui_media_default_vis(imedia) {
-  let vis = default_vis;
+function ui_media_default_vis(imedia, vis) {
+  // let vis = default_vis;
   let ent = a_ui.medias[imedia];
   if (ent) {
     return ent.vis;

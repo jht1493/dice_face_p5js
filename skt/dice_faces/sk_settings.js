@@ -227,7 +227,7 @@ let a_settings = [
     "canvas_resize_ref": ""
   },
   {
-    "setting": "0-facemesh-live",
+    "setting": "0-face-live",
     "back_color": 200,
     "room_name": "Dice-Play-1",
     "patch_layout": "Single",
@@ -300,6 +300,53 @@ let a_settings = [
     ],
     "pads_lock": 0,
     "pads_count": 2,
+    "canvas_resize_ref": ""
+  },
+  {
+    "setting": "0-face-tile",
+    "back_color": 200,
+    "room_name": "Dice-Play-1",
+    "patch_layout": "Single",
+    "canvas_size": "960x540",
+    "capture_size": "320x240",
+    "chat_name": "jht",
+    "chat_chk": 0,
+    "live_index": 0,
+    "live_chk": 1,
+    "patches": [
+      {
+        "isrc": {
+          "ipatch": 0,
+          "imedia": 2,
+          "effect": "tile",
+          "pad": {
+            "width": 960,
+            "height": 540,
+            "x0": 0,
+            "y0": 0
+          }
+        },
+        "eff": {
+          "ncell": 5,
+          "period": 3,
+          "freeze_patch": 0
+        }
+      }
+    ],
+    "medias": [
+      null,
+      {
+        "vis": false
+      },
+      {
+        "vis": false
+      },
+      {
+        "vis": false
+      }
+    ],
+    "pads_lock": 0,
+    "pads_count": 1,
     "canvas_resize_ref": ""
   },
   {
