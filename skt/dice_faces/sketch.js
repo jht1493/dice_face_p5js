@@ -57,7 +57,7 @@ function draw_patch(ipatch, prior) {
     a_patch_instances[ipatch] = inst;
     mouse_event_check(inst);
   } else if (media) {
-    // !!@ tile
+    // !!@ for tile - seek media up to date for live device connect/disconnect
     inst.media = media;
     inst.input = media.capture;
   }

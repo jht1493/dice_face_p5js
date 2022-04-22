@@ -1,5 +1,5 @@
 {
-  "setting": "",
+  "setting": "0-face-live",
   "back_color": 200,
   "room_name": "Dice-Play-1",
   "patch_layout": "Single",
@@ -33,7 +33,7 @@
         "reveal_full": 1,
         "box_outter": 0,
         "box_rect": 0,
-        "mar_h": 0,
+        "mar_h": 5,
         "draw": "mesh",
         "draw_mod": 4,
         "slen": 2,

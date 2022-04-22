@@ -18,6 +18,7 @@ class eff_tile {
   constructor(props) {
     Object.assign(this, props);
     this.init();
+    // stash instance for debugging
     tile_inst = this;
   }
   render() {
@@ -48,7 +49,7 @@ class eff_tile {
         this.advancePending = 1;
       }
     });
-    this.check_tile_op_que();
+    // this.check_tile_op_que();
   }
   livem_step() {
     if (!this.livem_cycle) return;
@@ -158,13 +159,13 @@ class eff_tile {
     dimg.copy(this.output, sx, sy, xstep, ystep, 0, 0, dimg.width, dimg.height);
     // this.got_freeze = this.iperiod;
   }
-  check_tile_op_que() {
-    // tile_op_que
-    let opt = tile_op_que.splice(0, 1);
-    if (opt.length < 1) return;
-    let op = opt[0];
-    console.log('check_tile_op_que op', op);
-  }
+  // check_tile_op_que() {
+  //   // tile_op_que
+  //   let opt = tile_op_que.splice(0, 1);
+  //   if (opt.length < 1) return;
+  //   let op = opt[0];
+  //   console.log('check_tile_op_que op', op);
+  // }
 }
 
 let tile_op_que = [];
@@ -173,10 +174,10 @@ let tile_inst;
 // opt={add:id}
 // opt={remove:id}
 //
-function tile_notify_media_update(opt) {
-  console.log('tile_inst opt', opt);
-  console.log('tile_inst tile_inst', tile_inst);
-  console.log('tile_notify_media_update a_media_panes', a_media_panes);
-  console.log('tile_notify_media_update a_media_devices', a_media_devices);
-  tile_op_que.push(opt);
-}
+// function tile_notify_media_update(opt) {
+//   console.log('tile_inst opt', opt);
+//   console.log('tile_inst tile_inst', tile_inst);
+//   console.log('tile_notify_media_update a_media_panes', a_media_panes);
+//   console.log('tile_notify_media_update a_media_devices', a_media_devices);
+//   tile_op_que.push(opt);
+// }

@@ -78,8 +78,9 @@ function find_media_by_id(id) {
 
 function remove_media_by_id(id) {
   a_media_panes = a_media_panes.filter((item) => item.id !== id);
+  console.log('remove_media_by_id id=', id);
   // console.log('remove_media_by_id id=', id, 'a_media_panes', a_media_panes);
-  tile_notify_media_update({ remove: id });
+  // tile_notify_media_update({ remove: id });
 }
 
 function remove_media_panes() {

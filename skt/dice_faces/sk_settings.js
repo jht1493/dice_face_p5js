@@ -17,7 +17,7 @@ let a_settings = [
       {
         "isrc": {
           "ipatch": 0,
-          "imedia": 1,
+          "imedia": 0,
           "effect": "image",
           "pad": {
             "width": 1920,
@@ -353,7 +353,7 @@ let a_settings = [
           "reveal_full": 1,
           "box_outter": 0,
           "box_rect": 0,
-          "mar_h": 0,
+          "mar_h": 5,
           "draw": "mesh",
           "draw_mod": 4,
           "slen": 2,
@@ -399,7 +399,7 @@ let a_settings = [
     "back_color": 200,
     "room_name": "Dice-Play-1",
     "patch_layout": "Single",
-    "canvas_size": "960x540",
+    "canvas_size": "1920x1080",
     "capture_size": "320x240",
     "chat_name": "tile",
     "chat_chk": 0,
@@ -412,8 +412,8 @@ let a_settings = [
           "imedia": 2,
           "effect": "tile",
           "pad": {
-            "width": 960,
-            "height": 540,
+            "width": 1920,
+            "height": 1080,
             "x0": 0,
             "y0": 0
           }
@@ -436,6 +436,12 @@ let a_settings = [
       },
       {
         "vis": false
+      },
+      {
+        "vis": true
+      },
+      {
+        "vis": true
       }
     ],
     "pads_lock": 0,
