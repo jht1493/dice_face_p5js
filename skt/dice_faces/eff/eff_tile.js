@@ -1,6 +1,6 @@
 class eff_tile {
   static meta_props = {
-    ncell: [2, 3, 4, 5, 6, 7, 8],
+    ncell: [1, 2, 3, 4, 5, 6, 7, 8],
     period: [1, -1, 0, 0.5, 1, 2, 3, 4, 5, 6, 10, 20, 30, 60],
     next: {
       button: (ent, aPatch) => {
