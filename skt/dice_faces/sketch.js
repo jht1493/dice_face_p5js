@@ -39,7 +39,7 @@ function draw_patch(ipatch, prior) {
   let aeff = effect_label(effect);
   let media = a_media_panes[imedia];
   if (!media) {
-    console.log('NO media imedia', imedia);
+    // console.log('NO media imedia', imedia);
   } else if (!media.ready()) {
     console.log('NOT media.ready imedia', imedia);
     return;

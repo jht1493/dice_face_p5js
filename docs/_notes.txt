@@ -1,5 +1,15 @@
 _notes.txt
 
+skt/dice_faces/eff/eff_tile.js
+    this.xstep = Math.floor(this.twidth / this.ncell);
+    this.ystep = Math.floor(this.theight / this.ncell);
+
+NO media for init imedia 2
+
+[] reset button on live
+[] reset timer if too many 
+  NOT media.ready imedia 2
+
 https://editor.p5js.org/jht1493/sketches/P_J51He7l
 shadertoy
 

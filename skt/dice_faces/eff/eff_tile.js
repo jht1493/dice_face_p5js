@@ -82,8 +82,6 @@ class eff_tile {
     this.xstep = Math.floor(this.twidth / this.ncell);
     this.ystep = Math.floor(this.theight / this.ncell);
     this.img_freeze = createImage(this.xstep, this.ystep);
-    // this.trigger_index = 0;
-    // this.trigger_count = this.ncell * this.ncell;
   }
   patch_stepper() {
     this.advancePending = 1;
