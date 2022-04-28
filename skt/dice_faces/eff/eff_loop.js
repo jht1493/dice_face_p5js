@@ -17,23 +17,41 @@ class eff_loop {
     freeze_screen: [0, 1],
   };
   static eff_names = [
-    'show',
+    // 'show',
     'bright',
-    'show',
+    // 'show',
     'delaunay',
-    'show',
+    // 'show',
     'grid',
-    'show',
+    // 'show',
     'bright',
-    'show',
+    // 'show',
     'maze',
-    'show',
+    // 'show',
     'sketchy',
-    'show',
+    // 'show',
     'slant_scan',
-    'show',
+    // 'show',
     'slit_scan',
   ];
+  // static eff_names = [
+  //   'show',
+  //   'bright',
+  //   'show',
+  //   'delaunay',
+  //   'show',
+  //   'grid',
+  //   'show',
+  //   'bright',
+  //   'show',
+  //   'maze',
+  //   'show',
+  //   'sketchy',
+  //   'show',
+  //   'slant_scan',
+  //   'show',
+  //   'slit_scan',
+  // ];
   // static eff_names = ['show', 'sketchy'];
   // show will trigger patch_stepper in face_mesh
   static eff_namesXX = [
@@ -157,9 +175,9 @@ class eff_loop {
     let label = eff_names[this.index];
     this.index = (this.index + 1) % eff_names.length;
     let aeff = effect_label(label);
-    console.log('next_eff aeff', aeff);
+    // console.log('next_eff aeff', aeff);
     if (aeff) {
-      // console.log('next_eff aeff', aeff.label);
+      console.log('next_eff aeff', aeff.label);
       let iprops = this.eff_inits(aeff.eff.meta_props);
       // Set input on iprops for eff_inst.init
       this.prepare_input(iprops);

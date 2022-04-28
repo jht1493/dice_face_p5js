@@ -99,3 +99,6 @@ const font8x8_dict = {
 };
 
 // const font8x8 = [
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt
+// https://github.com/jht1900/font8x8/blob/master/font8x8_basic.h
