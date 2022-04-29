@@ -10,6 +10,9 @@ NO media for init imedia 2
 [] reset timer if too many 
   NOT media.ready imedia 2
 
+>> Not reliable - need to reset on device
+  after long play
+  
 https://editor.p5js.org/jht1493/sketches/P_J51He7l
 shadertoy
 
