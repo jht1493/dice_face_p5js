@@ -4,9 +4,7 @@ p5.disableFriendlyErrors = true; // disables FES
 
 function setup() {
   // pixelDensity(1);
-
   let sz = ui_restore();
-
   my_canvas = createCanvas(sz.width, sz.height);
 
   init_media_panes();
