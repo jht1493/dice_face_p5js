@@ -87,7 +87,8 @@ class eff_tile {
     this.advancePending = 1;
   }
   draw_stamp() {
-    let simg = this.src_image();
+    // let simg = this.src_image();
+    let simg = this.input;
     if (this.advancePending) return;
     let sx = 0;
     let sy = 0;

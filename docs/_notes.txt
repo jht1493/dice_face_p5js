@@ -1,5 +1,7 @@
 _notes.txt
 
+[] fix aspect ratio
+
 skt/dice_faces/eff/eff_tile.js
     this.xstep = Math.floor(this.twidth / this.ncell);
     this.ystep = Math.floor(this.theight / this.ncell);
