@@ -1,5 +1,15 @@
 _notes.txt
 
+[] restart of tile host restarts face clients
+  tile: Hello
+
+  ui_chat_receive('', id);
+  let obj = { name: id, text: 'Bye' };
+
+function ui_chat_receive(str, id) {
+  // !!@ tile: Hello restart
+
+
 [] fix aspect ratio
 
 skt/dice_faces/eff/eff_tile.js

@@ -60,4 +60,8 @@ function ui_chat_receive(str, id) {
   }
   a_chat_log.html(name + ': ' + text + '<br/>', true);
   attach_media_nlabel(id, name);
+  // !!@ tile: Hello restart
+  if (name === 'tile' && text === 'restart') {
+    window.location.reload();
+  }
 }
