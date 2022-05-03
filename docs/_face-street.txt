@@ -1,5 +1,15 @@
 _face-street.txt
 
+
+# --
+2022-05-02 18:16:20
+
+dice_face:
+  google pixel fails.
+  one-plus OK:
+
+# --
+
 dice_faces/index.html?s=0-face-live
 http://127.0.0.1:5501/skt/dice_faces/index.html?s=0-face-live
 https://jht1493.net/a1/skt/dice_faces?s=0-face-live

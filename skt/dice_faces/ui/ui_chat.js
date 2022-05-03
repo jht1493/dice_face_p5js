@@ -47,7 +47,7 @@ function ui_chat_pane() {
 let a_chat_log;
 
 function ui_chat_receive(str, id) {
-  console.log('ui_chat_receive', str);
+  // console.log('ui_chat_receive', str);
   let obj = { name: id, text: 'Bye' };
   if (str) {
     obj = JSON.parse(str);

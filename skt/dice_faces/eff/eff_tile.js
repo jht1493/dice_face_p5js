@@ -1,6 +1,10 @@
 class eff_tile {
   static meta_props = {
-    ncell: [1, 2, 3, 4, 5, 6, 7, 8],
+    // ncell: [1, 2, 3, 4, 5, 6, 7, 8],
+    // cells: [[2, 2]],
+    cells: [[1, 1]],
+    icell: 0,
+    ncell_max: 4,
     period: [1, -1, 0, 0.5, 1, 2, 3, 4, 5, 6, 10, 20, 30, 60],
     next: {
       button: (ent, aPatch) => {
@@ -54,7 +58,7 @@ class eff_tile {
   livem_step() {
     if (!this.livem_cycle) return;
     let ipatch = this.isrc.ipatch;
-    console.log('livem_step ipatch', ipatch);
+    // console.log('livem_step ipatch', ipatch);
     let uiPatch = a_ui.patches[ipatch];
     let imedia = uiPatch.isrc.imedia;
     if (imedia >= a_media_panes.length) {
@@ -63,11 +67,23 @@ class eff_tile {
     imedia = (imedia + 1) % a_media_panes.length;
     if (imedia < 2) imedia = 2;
     if (imedia >= a_media_panes.length) imedia = uiPatch.isrc.imedia;
-    console.log('livem_step old imedia', uiPatch.isrc.imedia, 'new', imedia);
     let change = uiPatch.isrc.imedia !== imedia;
-    uiPatch.isrc.imedia = imedia;
     if (change) {
+      console.log('livem_step draw_step old imedia', uiPatch.isrc.imedia, 'new', imedia);
+      uiPatch.isrc.imedia = imedia;
       this.draw_step();
+    }
+    let omp_len = this.old_media_panes_length;
+    if (omp_len != a_media_panes.length) {
+      this.old_media_panes_length = a_media_panes.length;
+      if (a_media_panes.length <= 3) {
+        this.cells = [1, 1];
+      } else {
+        this.cells = [2, 2];
+      }
+      this.x = 0;
+      this.y = 0;
+      this.init_step();
     }
   }
   init() {
@@ -79,8 +95,12 @@ class eff_tile {
     this.output = createGraphics(this.twidth, this.theight);
     this.x = 0;
     this.y = 0;
-    this.xstep = Math.floor(this.twidth / this.ncell);
-    this.ystep = Math.floor(this.theight / this.ncell);
+    this.init_step();
+  }
+  init_step() {
+    let [xn, yn] = this.cells;
+    this.xstep = Math.floor(this.twidth / xn);
+    this.ystep = Math.floor(this.theight / yn);
     this.img_freeze = createImage(this.xstep, this.ystep);
   }
   patch_stepper() {
@@ -90,12 +110,22 @@ class eff_tile {
     // let simg = this.src_image();
     let simg = this.input;
     if (this.advancePending) return;
+    if (!this.media.ready()) {
+      console.log('draw_stamp NOT Ready imedia', this.isrc.imedia);
+      return;
+    }
     let sx = 0;
     let sy = 0;
     let sw = simg.width;
     let sh = simg.height;
     let { x, y, xstep, ystep } = this;
-    this.output.copy(simg, sx, sy, sw, sh, x, y, xstep, ystep);
+    // Fill background space
+    this.output.copy(simg, sx, sy, 1, 1, x, y, xstep, ystep);
+    let dw = ystep * (sw / sh);
+    let x1 = Math.floor(x + (xstep - dw) / 2);
+    // draw input preserving aspect ratio
+    this.output.copy(simg, sx, sy, sw, sh, x1, y, dw, ystep);
+    // this.output.copy(simg, sx, sy, sw, sh, x, y, xstep, ystep);
     // copy(srcImage, sx, sy, sw, sh, dx, dy, dw, dh)
     this.last_x = x;
     this.last_y = y;

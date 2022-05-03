@@ -41,9 +41,9 @@ function draw_patch(ipatch, prior) {
   } else if (!media.ready()) {
     console.log('NOT media.ready imedia', imedia);
     let inst = a_patch_instances[ipatch];
-    console.log('NOT media.ready inst', inst);
+    // console.log('NOT media.ready inst', inst);
     if (inst && inst.livem_step) {
-      console.log(' livem_step imedia', imedia);
+      console.log('livem_step imedia', imedia);
       inst.livem_step();
     }
     return;
