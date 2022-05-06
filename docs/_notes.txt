@@ -1,5 +1,45 @@
 _notes.txt
 
+# --
+2022-05-04 10:55:33
+
+>> how to avoid flash??
+
+>> try show all faces
+
+a_ui.canvas_data_chk
+
+bin/install_js-p5live.sh
+No on connect in https://p5livemedia.itp.io/p5livemedia.js
+
+https://raw.githubusercontent.com/vanevery/p5LiveMedia/master/public/p5livemedia.js
+
+    constructor(sketch, type, elem, room, host, videoBitrate = null, audioBitrate = null) {
+
+
+>> 320x240 canvas on face device to get 640x480 in stream out
+
+function create_media_pane(device, vis_in) {
+  let capture = device.capture;
+
+  function ready() {
+    return capture.loadedmetadata;
+  }
+
+function init_media_panes() {
+  // First media pane is canvas
+  a_media_panes = [
+    {
+      label: 'Canvas',
+      capture: my_canvas,
+      ready: function () {
+        return 1;
+      },
+
+    inst.input = media.capture;
+  let media = a_media_panes[imedia];
+
+# --
 [] restart of tile host restarts face clients
   tile: Hello
 

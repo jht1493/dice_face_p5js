@@ -71,7 +71,7 @@
 */
 class p5LiveMedia {
 
-    constructor(sketch, type, elem, room, host) {
+    constructor(sketch, type, elem, room, host, videoBitrate = null, audioBitrate = null) {
 
         this.sketch = sketch;
         //sketch.disableFriendlyErrors = true;
@@ -81,12 +81,16 @@ class p5LiveMedia {
         this.onStreamCallback;
         this.onDataCallback;
         this.onDisconnectCallback;
+        this.onConnectCallback;
         
         if (!host) {
             this.socket = io.connect("https://p5livemedia.itp.io/");
         } else {
             this.socket = io.connect(host);
         }
+
+        this.videoBitrate = videoBitrate;
+        this.audioBitrate = audioBitrate;
         
         //console.log(elem.elt);
     
@@ -95,7 +99,7 @@ class p5LiveMedia {
         } else if (type == "CAPTURE") {
             this.mystream = elem;
         } else {
-            // Assume it is just "DATA"
+            // Assume it is just "DATA" or just receiving a stream
 
         }
 
@@ -111,6 +115,8 @@ class p5LiveMedia {
             } else {
                 this.socket.emit("room_connect", room);
             }
+
+            this.callOnConnectCallback(this.socket.id);
         });
 
         this.socket.on('disconnect', (data) => {
@@ -140,7 +146,7 @@ class p5LiveMedia {
 
                     // create a new simplepeer and we'll be the "initiator"			
                     let simplepeer = new SimplePeerWrapper(this,
-                        true, data[i], this.socket, this.mystream
+                        true, data[i], this.socket, this.mystream, this.videoBitrate, this.audioBitrate
                     );
 
                     // Push into our array
@@ -176,7 +182,7 @@ class p5LiveMedia {
                 //console.log("Never found right simplepeer object");
                 // Let's create it then, we won't be the "initiator"
                 let simplepeer = new SimplePeerWrapper(this,
-                    false, from, this.socket, this.mystream
+                    false, from, this.socket, this.mystream, this.videoBitrate, this.audioBitrate
                 );
                 
                 // Push into our array
@@ -188,14 +194,35 @@ class p5LiveMedia {
         });
     }
 
-    // // use this to add a track to a stream - assuming this is a stream, it will have to extract the track out
-    // addtrack(stream, type) {
-    //     if (type == "CANVAS") {
-    //         this.mystream = elem.elt.captureStream(30);
-    //     } else if (type == "CAPTURE") {
-    //         this.mystream = elem;
-    //     }
-    // }
+    // Add a stream
+    addStream(elem, type) {
+        let goodStream = false;
+        if (type == "CANVAS") {
+            this.mystream = elem.elt.captureStream(30);
+            goodStream = true;
+        } else if (type == "CAPTURE") {
+            this.mystream = elem;
+            goodStream = true;
+        }
+
+        if (goodStream) {
+            for (let i = 0; i < this.simplepeers.length; i++) {
+                if (this.simplepeers[i] != null) {
+                    this.simplepeers[i].addStream(this.mystream);
+                }
+            }
+        }
+    }
+
+    // Disconnect from a specific peer or all 
+    // Currently untested
+    disconnect(id=-1) {
+        for (let i = 0; i < this.simplepeers.length; i++) {
+            if (this.simplepeers[i] != null && (id == -1 || id == this.simplepeers[i].socket_id)) {
+                this.simplepeers[i].destroy();
+            }
+        }
+    }
 
     send(data) {
         for (let i = 0; i < this.simplepeers.length; i++) {
@@ -212,6 +239,8 @@ class p5LiveMedia {
             this.onData(callback);
         } else if (event == "disconnect") {
             this.onDisconnect(callback);
+        } else if (event == "connect") {
+            this.onConnect(callback);
         }
     }
 
@@ -225,6 +254,16 @@ class p5LiveMedia {
 
     onData(callback) {
         this.onDataCallback = callback;
+    }
+
+    onConnect(callback) {
+        this.onConnectCallback = callback;
+    }
+
+    callOnConnectCallback(id) {
+        if (this.onConnectCallback) {
+            this.onConnectCallback(id);
+        }
     }
 
     callOnDisconnectCallback(id) {
@@ -281,11 +320,29 @@ class p5LiveMedia {
 // A wrapper for simplepeer as we need a bit more than it provides
 class SimplePeerWrapper {
 
-    constructor(p5lm, initiator, socket_id, socket, stream) {
-        this.simplepeer = new SimplePeer({
-            initiator: initiator,
-            trickle: false
-        });
+    constructor(p5lm, initiator, socket_id, socket, stream, videoBitrate = null, audioBitrate = null) {
+        if (!videoBitrate && !audioBitrate) {
+            this.simplepeer = new SimplePeer({
+                initiator: initiator,
+                trickle: false       
+            });
+        } else {
+            this.simplepeer = new SimplePeer({
+                initiator: initiator,
+                trickle: false,
+                sdpTransform: (sdp) => {
+                    let newSDP = sdp;
+                    if (videoBitrate) {
+                        newSDP = this.setMediaBitrate(sdp, videoBitrate, 'video');
+                    }
+                    if (audioBitrate) {
+                        newSDP = this.setMediaBitrate(newSDP, audioBitrate, 'audio');
+                    }
+                    console.log(newSDP);
+                    return newSDP;   
+                }         
+            });
+        }
 
         this.p5livemedia = p5lm;
 
@@ -374,7 +431,51 @@ class SimplePeerWrapper {
         }
     }
 
+    addStream(stream) {
+        this.simplepeer.addStream(stream);
+    }
+
     inputsignal(sig) {
         this.simplepeer.signal(sig);
     }
+
+    // Borrowed from after https://webrtchacks.com/limit-webrtc-bandwidth-sdp/
+    setMediaBitrate(sdp, bitrate, mediaType = 'video') {
+        var lines = sdp.split("\n");
+        var line = -1;
+        for (var i = 0; i < lines.length; i++) {
+          if (lines[i].indexOf("m="+mediaType) === 0) {
+            line = i;
+            break;
+          }
+        }
+        if (line === -1) {
+          console.debug("Could not find the m line for", mediaType);
+          return sdp;
+        }
+        console.debug("Found the m line for", mediaType, "at line", line);
+       
+        // Pass the m line
+        line++;
+       
+        // Skip i and c lines
+        while(lines[line].indexOf("i=") === 0 || lines[line].indexOf("c=") === 0) {
+          line++;
+        }
+       
+        // If we're on a b line, replace it
+        if (lines[line].indexOf("b") === 0) {
+          console.debug("Replaced b line at line", line);
+          lines[line] = "b=AS:"+bitrate;
+          return lines.join("\n");
+        }
+        
+        // Add a new b line
+        console.debug("Adding new b line before line", line);
+        var newLines = lines.slice(0, line)
+        newLines.push("b=AS:"+bitrate)
+        newLines = newLines.concat(lines.slice(line, lines.length))
+        return newLines.join("\n")        
+    }
+        
 }		

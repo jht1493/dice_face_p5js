@@ -106,11 +106,11 @@ let a_canvas_sizes = [
   },
 ];
 
-function canvas_size_default(defaultSize) {
+function canvas_size_default() {
   let sz = a_canvas_sizes_dict[a_ui.canvas_size];
   // console.log('canvas_sizei index', a_ui.canvas_sizei, 'size', sz);
   if (sz) return sz;
-  return defaultSize;
+  return a_canvas_sizes[0];
 }
 
 function init_size_in(sizes) {

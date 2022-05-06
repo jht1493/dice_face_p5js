@@ -7,9 +7,7 @@ function ui_live_selection() {
   chk.changed(function () {
     let a_live = this.checked();
     a_ui_set('live_chk', a_live ? 1 : 0);
-    select('#ichat_blk').style(
-      a_ui.live_chk ? 'display:inline' : 'display:none'
-    );
+    select('#ichat_blk').style(a_ui.live_chk ? 'display:inline' : 'display:none');
     livem_restore();
   });
 
@@ -31,6 +29,16 @@ function ui_live_selection() {
     if (a_ui.live_chk) attach_livem(ent);
     else detach_livem(ent);
   });
+
+  {
+    let chk = createCheckbox('Data ', a_ui.canvas_data_chk);
+    div.child(chk);
+    chk.style('display:inline');
+    chk.changed(function () {
+      let state = this.checked();
+      a_ui_set('canvas_data_chk', state ? 1 : 0);
+    });
+  }
 }
 
 function media_for_livem_index(index) {

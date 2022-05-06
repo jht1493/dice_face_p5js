@@ -18,6 +18,7 @@ class eff_tile {
     },
     _freeze_patch: [0, 1],
     livem_cycle: [0, 1],
+    show_all: [1, 0],
   };
   constructor(props) {
     Object.assign(this, props);
@@ -41,7 +42,7 @@ class eff_tile {
     if (this.freeze_patch && this.wasFrozen) {
       this.draw_freeze();
     } else {
-      this.draw_stamp();
+      this.draw_frame();
     }
     this.period_timer.check(() => {
       this.iperiod++;
@@ -73,6 +74,9 @@ class eff_tile {
       uiPatch.isrc.imedia = imedia;
       this.draw_step();
     }
+    this.check_media_panes();
+  }
+  check_media_panes() {
     let omp_len = this.old_media_panes_length;
     if (omp_len != a_media_panes.length) {
       this.old_media_panes_length = a_media_panes.length;
@@ -103,15 +107,45 @@ class eff_tile {
     this.ystep = Math.floor(this.theight / yn);
     this.img_freeze = createImage(this.xstep, this.ystep);
   }
-  patch_stepper() {
-    this.advancePending = 1;
+  draw_frame() {
+    if (this.show_all) {
+      this.draw_all();
+    } else {
+      this.draw_single(this.input);
+    }
   }
-  draw_stamp() {
+  draw_all() {
+    this.check_media_panes();
+    let ipatch = this.isrc.ipatch;
+    let uiPatch = a_ui.patches[ipatch];
+    let imedia = uiPatch.isrc.imedia % a_media_panes.length;
+    if (imedia != uiPatch.isrc.imedia) {
+      return;
+    }
+    let more = 1;
+    let input = this.input;
+    let savex = this.x;
+    let savey = this.y;
+    let nimedia = imedia;
+    while (more) {
+      this.draw_single(input);
+      nimedia = (nimedia + 1) % a_media_panes.length;
+      if (nimedia < 2 && a_media_panes.length > 2) nimedia = 2;
+      let media = a_media_panes[nimedia];
+      input = media.capture;
+      more = nimedia != imedia;
+      this.draw_step();
+      // console.log('draw_all more', more, 'nimedia', nimedia);
+    }
+    this.x = savex;
+    this.y = savey;
+  }
+  draw_single(simg) {
     // let simg = this.src_image();
-    let simg = this.input;
+    // let simg = this.input;
     if (this.advancePending) return;
     if (!this.media.ready()) {
-      console.log('draw_stamp NOT Ready imedia', this.isrc.imedia);
+      console.log('draw_single NOT Ready imedia', this.isrc.imedia);
       return;
     }
     let sx = 0;
@@ -130,7 +164,12 @@ class eff_tile {
     this.last_x = x;
     this.last_y = y;
   }
+
+  patch_stepper() {
+    this.advancePending = 1;
+  }
   draw_step(dir) {
+    // if (this.show_all) return;
     if (!dir) dir = 1;
     this.x += this.xstep * dir;
     if (this.x + this.xstep / 2 >= this.output.width || this.x < 0) {

@@ -3,3 +3,28 @@ _p5LiveMedia.txt
 
 https://github.com/vanevery/p5LiveMedia
 
+    constructor(sketch, type, elem, room, host, videoBitrate = null, audioBitrate = null) {
+
+
+# --
+
+Error: Connection failed.
+    at a (simplepeer.min.js:6:78044)
+    at p._onConnectionStateChange (simplepeer.min.js:6:88776)
+    at RTCPeerConnection._pc.onconnectionstatechange (simplepeer.min.js:6:80358)
+
+        this.simplepeer.on('error', (err) => {
+            // ERR_WEBRTC_SUPPORT
+            // ERR_CREATE_OFFER
+            // ERR_CREATE_ANSWER
+            // ERR_SET_LOCAL_DESCRIPTION
+            // ERR_SET_REMOTE_DESCRIPTION
+            // ERR_ADD_ICE_CANDIDATE
+            // ERR_ICE_CONNECTION_FAILURE
+            // ERR_SIGNALING
+            // ERR_DATA_CHANNEL
+            // ERR_CONNECTION_FAILURE
+            console.log(err);
+        });
+
+!!@ on 'error' 

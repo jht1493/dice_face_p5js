@@ -12,10 +12,14 @@ function attach_livem(ent) {
       return;
     }
     type = 'CAPTURE';
-  } else {
+  } else if (!a_ui.canvas_data_chk) {
     // no device --> canvas
     stream = my_canvas;
     type = 'CANVAS';
+  } else {
+    // Data only - don't stream out our canvas
+    stream = null;
+    type = 'DATA';
   }
   let livem = ent.livem;
   if (livem) {
@@ -29,6 +33,7 @@ function attach_livem(ent) {
     livem.on('stream', gotStream);
     livem.on('data', gotData);
     livem.on('disconnect', gotDisconnect);
+    livem.on('connect', gotConnect);
     a_livem = livem;
     // console.log('attach_livem SET a_livem', a_livem);
   }
@@ -73,6 +78,10 @@ function gotDisconnect(id) {
   console.log('gotDisconnect id', id);
   ui_chat_receive('', id);
   remove_media_pane(id);
+}
+
+function gotConnect(id) {
+  console.log('gotConnect id', id);
 }
 
 function livem_send(text) {

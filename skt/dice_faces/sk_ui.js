@@ -55,6 +55,7 @@ let a_ui = {
   pads_count: 0,
   canvas_resize_ref: '',
   // pads_scale
+  canvas_data_chk: 0,
 };
 let a_patch_instances = [];
 let a_canvas_size_lock = 0;

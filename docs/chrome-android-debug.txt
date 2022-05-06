@@ -1,0 +1,15 @@
+_chrome-android-debug.txt
+
+https://www.addictivetips.com/android/get-web-console-log-chrome-for-android/
+
+On your Android phone, you need to do three things;
+
+Install Chrome.
+Enable Developer options. You can do this by going to the Settings app, finding System, and tapping the build number seven times.
+Enable USB Debugging. Go through the Developer options and enable USB debugging there.
+
+On your desktop
+
+
+chrome://inspect/#devices
+
