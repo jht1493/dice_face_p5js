@@ -1,0 +1,21 @@
+heart.txt
+
+https://www.mathscareers.org.uk/valentines-day-maths-what-is-the-equation-for-a-heart/
+
+The equation for the cardioid in Figure 1 is as follows: (x^{2} + y^{2} + a x) ^2 = a^2 ( x^2 + y^2)
+
+sqrt(cos(x))*cos(400*x)+sqrt (abs(x))-0.4)*(4-x*x)^0.1
+
+
+r = a (1 - \cos\varphi)
+
+Figure 3: An upright cardioid
+ r = a (1 - \sin\varphi)
+
+
+
+https://towardsdatascience.com/plot-the-shape-of-my-heart-698d4776c51a
+f(top) = sqrt(1 - (abs(x) - 1)^2)
+f(bot) = arccos(1 - abs(x)) - PI
+
+box = (-2,1) (2,1), (-2,-3) (2,-3)
