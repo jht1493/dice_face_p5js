@@ -1,6 +1,40 @@
 _notes.txt
 
 # --
+2022-05-18 14:33:15
+
+https://editor.p5js.org/lisajamhoury/sketches/JMSVEKmx8
+
+https://www.appgeeker.com/how-to/convert-webm-to-mov-on-mac.html
+
+https://cloudconvert.com/webm-to-mov
+
+https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API/Recording_a_media_element
+
+# --
+2022-05-17 13:46:08
+
+https://developer.apple.com/videos/play/wwdc2021/10101/
+Discover rolling clips with ReplayKit
+
+https://developer.apple.com/videos/play/wwdc2021/10187/
+Build custom experiences with Group Activities
+
+https://developer.apple.com/documentation/groupactivities/drawing_content_in_a_group_session
+
+https://developer.apple.com/videos/play/wwdc2020/10633/
+Capture and stream apps on the Mac with ReplayKit
+
+https://developer.apple.com/videos/play/wwdc2018/601/
+Live Screen Broadcast with ReplayKit
+
+https://developer.apple.com/videos/play/wwdc2017/606
+What's New with Screen Recording and Live Broadcast
+
+https://gist.github.com/IsaacXen/874c59aec92a13f30728aecdabb9ea80
+(Almost) Every WWDC videos download links for aria2c. · GitHub
+
+# --
 2022-05-04 10:55:33
 
 >> how to avoid flash??

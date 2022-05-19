@@ -53,7 +53,7 @@ class eff_tile_clock {
         this.draw_stamp();
       }
     }
-    // this.draw_center();
+    this.draw_center();
     this.period_timer.check(() => {
       this.iperiod++;
       if (this.freeze_patch) {
