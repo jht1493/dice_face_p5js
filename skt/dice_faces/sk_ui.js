@@ -27,7 +27,7 @@ let a_effects = [
   { label: 'bodypix', eff: eff_bodypix },
   { label: 'face_band', eff: eff_face_band },
   { label: 'fft_polar', eff: eff_fft_polar },
-  { label: 'fft_se', eff: eff_fft_graph },
+  { label: 'fft_graph', eff: eff_fft_graph },
   // { label: 'face_flat', eff: eff_face_flat },
   // { label: 'face_points', eff: eff_face_points },
   // { label: 'line', eff: eff_line },
