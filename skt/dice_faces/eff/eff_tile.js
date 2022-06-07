@@ -80,10 +80,17 @@ class eff_tile {
     let omp_len = this.old_media_panes_length;
     if (omp_len != a_media_panes.length) {
       this.old_media_panes_length = a_media_panes.length;
-      if (a_media_panes.length <= 3) {
+      // 0 = Canvas
+      // 1 = local camera
+      // 2 = first livemedia source
+      let nsrc = a_media_panes.length - 2;
+      if (nsrc <= 1) {
         this.cells = [1, 1];
-      } else {
+      } else if (nsrc <= 4) {
         this.cells = [2, 2];
+      } else {
+        // 5 or more livemedia source
+        this.cells = [3, 3];
       }
       this.x = 0;
       this.y = 0;

@@ -128,10 +128,6 @@ function build_settings() {
     const fpath = path.join(settingsPath, afile);
     // console.log('afile', afile);
     console.log(afile);
-    // const ent = fs.readJsonSync(fpath, { throws: false });
-    // if (! ent) {
-    //   console.log('read failed', ent)
-    // }
     const str = fs.readFileSync(fpath, 'utf8');
     if (!str) {
       console.log('read failed fpath', fpath);
