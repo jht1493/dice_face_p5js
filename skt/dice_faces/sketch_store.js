@@ -4,12 +4,11 @@ function ui_restore() {
   ui_capture_init();
   ui_canvas_init();
   store_name_restore();
-  if (store_url_check()) {
-    return;
+  if (!store_url_check()) {
+    store_restore_ver();
+    store_restore_canvas_lock();
+    store_restore_a_ui();
   }
-  store_restore_ver();
-  store_restore_canvas_lock();
-  store_restore_a_ui();
   return canvas_size_default();
 }
 
