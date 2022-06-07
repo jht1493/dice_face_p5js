@@ -62,3 +62,4 @@ let a_canvas_size_lock = 0;
 
 let a_settings_pending; // url params s= will set
 let a_hideui = 0; // Default is to hide using with s= settings
+let a_settings_async; // settings from ?al= json load

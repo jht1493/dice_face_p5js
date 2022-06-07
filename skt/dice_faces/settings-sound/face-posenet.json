@@ -1,5 +1,5 @@
 {
-  "setting": "face-graph",
+  "setting": "face-posenet",
   "back_color": 200,
   "room_name": "Dice-Play-1",
   "patch_layout": "Single",
@@ -13,6 +13,22 @@
     {
       "isrc": {
         "ipatch": 0,
+        "imedia": 1,
+        "effect": "fft_graph",
+        "pad": {
+          "width": 640,
+          "height": 480,
+          "x0": 0,
+          "y0": 0
+        }
+      },
+      "eff": {
+        "max": 5
+      }
+    },
+    {
+      "isrc": {
+        "ipatch": 1,
         "imedia": 1,
         "effect": "face_band",
         "pad": {
@@ -32,9 +48,9 @@
     },
     {
       "isrc": {
-        "ipatch": 1,
+        "ipatch": 2,
         "imedia": 1,
-        "effect": "fft_graph",
+        "effect": "pose_net",
         "pad": {
           "width": 640,
           "height": 480,
@@ -43,7 +59,16 @@
         }
       },
       "eff": {
-        "max": 5
+        "alpha": 255,
+        "ndetect": 4,
+        "points": 0,
+        "points_size": 10,
+        "points_color_offset": 0,
+        "skel": 0,
+        "skel_weight": 1,
+        "skel_color_offset": 0,
+        "hflip": 1,
+        "show_head": 1
       }
     }
   ],
@@ -54,7 +79,7 @@
     }
   ],
   "pads_lock": 0,
-  "pads_count": 2,
+  "pads_count": 3,
   "canvas_resize_ref": "",
   "canvas_data_chk": 0
 }

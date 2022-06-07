@@ -82,6 +82,10 @@ function effect_label(label) {
     return a_effects[0];
   }
   let eff = a_effects_dict[label];
+  if (!eff) {
+    console.log('effect_label !!@ eff', label);
+    eff = a_effects[0];
+  }
   return eff;
 }
 

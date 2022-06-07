@@ -17,8 +17,9 @@ function check_reset_video() {
     // let delay = 5000;
     let delay = 2000;
     function func() {
-      let nref = document.location.href + '?v=' + random();
-      document.location.href = nref;
+      let nref = (random() + '').substring(2);
+      nref = location_noquery() + '?v=' + nref;
+      window.location = nref;
       // console.log('nref', nref);
     }
     setTimeout(func, delay);
@@ -26,7 +27,7 @@ function check_reset_video() {
   function alert_reload() {
     window.alert('reloading page');
     let nref = document.location.href + '?v=' + random();
-    document.location.href = nref;
+    window.location.href = nref;
   }
   wait_reload();
 }

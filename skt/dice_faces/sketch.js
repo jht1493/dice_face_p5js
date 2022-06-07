@@ -16,6 +16,11 @@ function setup() {
 
 function draw() {
   // background(255);
+  if (a_settings_async) {
+    store_restore_from(a_settings_async);
+    // window location reset
+    return;
+  }
   set_background();
   stroke(255);
   if (!a_ui.pads_count) {

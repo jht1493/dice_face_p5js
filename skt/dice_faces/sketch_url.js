@@ -8,6 +8,7 @@ function store_url_check() {
     // console.log('store_url_check query', query);
     let params = params_query(query);
     // console.log('store_url_check params', params);
+    // settings encoded as json string, if present return true to avoid other settings init
     let a_str = params['a'];
     if (a_str) {
       afound = url_a_restore(a_str);
@@ -28,6 +29,16 @@ function store_url_check() {
     let h_str = params['h'];
     if (h_str) {
       a_hideui = parseFloat(h_str);
+    }
+    // ?al=settings-sound/face-graph.json
+    // ?al=settings-sound/face-posenet.json
+    let al_str = params['al'];
+    if (al_str) {
+      let url = './' + al_str;
+      loadJSON(url, (data) => {
+        console.log('al_str data', data);
+        a_settings_async = data;
+      });
     }
   }
   return afound;
@@ -55,13 +66,18 @@ function url_a_restore(str) {
   return 0;
 }
 
-// Return current location a_store_prefix
-function location_url() {
+function location_noquery() {
   let loc = window.location.href;
   let ii = loc.indexOf('?');
   if (ii >= 0) {
     loc = loc.substring(0, ii);
   }
+  return loc;
+}
+
+// Return current location a_store_prefix
+function location_url() {
+  let loc = location_noquery();
   loc += '?';
   if (a_store_prefix) {
     let ustr = encodeURIComponent(a_store_prefix);
@@ -116,9 +132,10 @@ let isrc_props = {
 };
 
 function store_restore_from(ent) {
-  console.log('store_restore_from', ent);
+  console.log('store_restore_from ent', ent);
   store_restore_ent(ent);
   let loc = location_url();
+  console.log('store_restore_from loc', loc);
   window.location = loc;
 }
 

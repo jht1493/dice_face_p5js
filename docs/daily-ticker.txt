@@ -19,3 +19,5 @@ loadJSON covid19 graph
 
 [] scale to window width
 [] show total to date USA
+
+
