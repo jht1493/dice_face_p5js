@@ -126,11 +126,18 @@ class eff_pose_net {
     // quad(x1, y1, x2, y2, x3, y3, x4, y4);
     quad(x1, y1, x2, y2, x6, y6, x5, y5);
     quad(x5, y5, x6, y6, x3, y3, x4, y4);
-    this.draw_arm(pose.rightElbow, pose.rightWrist, x1, y1);
-    this.draw_arm(pose.leftElbow, pose.leftWrist, x2, y2);
+
+    // Arms
+    this.draw_limb(pose.rightElbow, pose.rightWrist, x1, y1, h);
+    this.draw_limb(pose.leftElbow, pose.leftWrist, x2, y2, h);
+
+    // Legs
+    let hh = h / 2;
+    this.draw_limb(pose.rightKnee, pose.rightAnkle, x4 - hh, y4 - hh, h);
+    this.draw_limb(pose.leftKnee, pose.leftAnkle, x3 + hh, y3 - hh, h);
   }
-  draw_arm(elbow, wrist, x2, y2) {
-    let { px0, py0, r1, h } = this;
+  draw_limb(elbow, wrist, x2, y2, h) {
+    let { px0, py0, r1 } = this;
     let x1 = elbow.x * r1 + px0;
     let y1 = elbow.y * r1 + py0;
     let hh = h / 2;
@@ -150,9 +157,9 @@ class eff_pose_net {
     let x6 = x1 + r * cos(a + HALF_PI);
     let y6 = y1 + r * sin(a + HALF_PI);
     quad(x3, y3, x4, y4, x6, y6, x5, y5);
-    this.draw_fore_arm(wrist, x1, y1, r);
+    this.draw_fore_limb(wrist, x1, y1, r);
   }
-  draw_fore_arm(wrist, x1, y1, r) {
+  draw_fore_limb(wrist, x1, y1, r) {
     let { px0, py0, r1 } = this;
     let x0 = wrist.x * r1 + px0;
     let y0 = wrist.y * r1 + py0;
@@ -170,9 +177,9 @@ class eff_pose_net {
     let y6 = y0 + r * sin(a + HALF_PI);
     quad(x3, y3, x4, y4, x6, y6, x5, y5);
     circle(x0, y0, r * 2);
-    this.draw_hand(x0, y0, r, a);
+    this.draw_hand_foot(x0, y0, r, a);
   }
-  draw_hand(x0, y0, r, a) {
+  draw_hand_foot(x0, y0, r, a) {
     // r = r * 0.75;
     let x2 = x0 - 1 * r * cos(a);
     let y2 = y0 - 1 * r * sin(a);
