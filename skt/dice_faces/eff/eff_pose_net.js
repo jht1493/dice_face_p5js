@@ -2,6 +2,7 @@ class eff_pose_net {
   static meta_props = {
     alpha: [255, 230, 180, 100, 10],
     ndetect: [4, 1, 2, 3],
+    figure_color: [0, 1],
     _points: [0, 1],
     points_size: [10, 20, 30, 40],
     points_color_offset: [0, 1, 2, 3],
@@ -27,6 +28,15 @@ class eff_pose_net {
   init() {
     this.video = this.input.elt;
     this.poses = [];
+
+    if (this.figure_color) {
+      // Copy of input for getting color
+      let w = this.input.width;
+      let h = this.input.height;
+      this.img = createImage(w, h);
+      this.init_input = this.input;
+    }
+
     ui_message('loading model...');
     let options = { flipHorizontal: this.hflip, maxPoseDetections: this.ndetect };
     this.poseNet = ml5.poseNet(this.video, options, function () {
@@ -39,6 +49,9 @@ class eff_pose_net {
     });
   }
   drawFigure(poses) {
+    if (this.figure_color) {
+      image_copy(this.img, this.init_input);
+    }
     // noFill();
     strokeWeight(0);
     let pad = this.isrc.pad;
@@ -49,11 +62,23 @@ class eff_pose_net {
     this.r1 = h / this.input.height;
     // Loop through all the poses detected
     for (let i = 0; i < poses.length; i++) {
-      let col = dot_colors[i % dot_colors.length];
+      let pose = poses[i].pose;
+
+      let col;
+      if (this.figure_color) {
+        let x1 = pose.nose.x;
+        let y1 = pose.nose.y;
+        if (this.hflip) {
+          x1 = this.img.width - x1;
+        }
+        col = this.img.get(x1, y1);
+      } else {
+        col = dot_colors[i % dot_colors.length];
+      }
       col[3] = this.alpha;
       stroke(col);
       fill(col);
-      let pose = poses[i].pose;
+
       this.draw_pose(pose);
     }
   }
@@ -133,8 +158,10 @@ class eff_pose_net {
 
     // Legs
     let hh = h / 2;
-    this.draw_limb(pose.rightKnee, pose.rightAnkle, x4 - hh, y4 - hh, h);
-    this.draw_limb(pose.leftKnee, pose.leftAnkle, x3 + hh, y3 - hh, h);
+    let hhy = hh;
+    if (!this.hflip) hh = -hh;
+    this.draw_limb(pose.rightKnee, pose.rightAnkle, x4 - hh, y4 - hhy, h);
+    this.draw_limb(pose.leftKnee, pose.leftAnkle, x3 + hh, y3 - hhy, h);
   }
   draw_limb(elbow, wrist, x2, y2, h) {
     let { px0, py0, r1 } = this;
