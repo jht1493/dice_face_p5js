@@ -1,8 +1,8 @@
 class eff_mov_show {
   static meta_props = {
     group: ['covid19mov', '370-mov'],
-    ifile: [0, 1],
-    ispeed: [1],
+    ifile: [0, 1, 2],
+    speed: [1, 0.5, 0.2, 0.1],
     next: {
       button: (ent, aPatch) => {
         ent.next_action(aPatch);
@@ -33,6 +33,8 @@ class eff_mov_show {
       });
     }
     // console.log('eff_mov_show', this.vid.duration(), this.vid.time());
+    // image(this.vid, 0, 0, width, height);
+    image_scaled_pad(this.vid, this.isrc.pad);
   }
   init() {
     this.predictions = [];
@@ -57,17 +59,21 @@ class eff_mov_show {
     // console.log('eff_mov_show vid', this.vid);
     this.vid = createVideo(ipath, () => {
       console.log('eff_mov_show loaded');
+      this.vid.loop();
+      this.vid.volume(0);
+      this.vid.speed(this.speed);
       this.vid.play();
-      // this.vid.loop();
     });
     this.vid.onended(() => {
       // Chrome fails to play in reverse
       // this.ispeed = this.ispeed == 1 ? -1 : 1;
       console.log('eff_mov_show onended', this.ispeed);
+      this.vid.speed(this.speed);
       this.vid.play();
     });
-    this.vid.size(width, height);
-    this.vid.position(0, 0);
+    this.vid.hide();
+    // this.vid.size(width, height);
+    // this.vid.position(0, 0);
   }
   remove_eff() {
     console.log('eff_mov_show remove_eff vid', this.vid);
