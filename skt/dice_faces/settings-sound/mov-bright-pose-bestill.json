@@ -49,7 +49,7 @@
         "src_color": 255,
         "fill": 1,
         "invert": 1,
-        "shape": "pix"
+        "shape": "circle"
       }
     },
     {
