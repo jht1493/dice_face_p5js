@@ -4,23 +4,22 @@ p5.disableFriendlyErrors = true; // disables FES
 
 function setup() {
   // pixelDensity(1);
-  let sz = ui_restore();
-  my_canvas = createCanvas(sz.width, sz.height);
+  // let sz = ui_restore();
+  my_canvas = createCanvas(100, 100);
 
-  init_media_panes();
+  ui_restore((sizeResult) => {
+    console.log('setup sizeResult', sizeResult);
+    resizeCanvas(sizeResult.width, sizeResult.height);
 
-  create_ui();
+    init_media_panes();
 
-  media_enum();
+    create_ui();
+
+    media_enum();
+  });
 }
 
 function draw() {
-  // background(255);
-  if (a_settings_async) {
-    store_restore_from(a_settings_async);
-    // window location reset
-    return;
-  }
   set_background();
   stroke(255);
   if (!a_ui.pads_count) {

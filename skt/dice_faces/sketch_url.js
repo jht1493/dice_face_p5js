@@ -1,17 +1,25 @@
 // Are we setting up store from our url query?
-function store_url_check() {
-  let afound = 0;
+// url parm
+//  a = gather settings from param itself
+//  u = store prefix
+//  s = settings name, also hide ui by default
+//  al = settings from json file
+//  h = 0/1, explicit setting for hide ui
+//
+function store_url_parse(urlResult) {
+  let uiSet = 0;
+  let settings;
   let loc = window.location.href;
   let ind = loc.indexOf('?');
   if (ind >= 0) {
     let query = loc.substring(ind + 1);
-    // console.log('store_url_check query', query);
+    // console.log('store_url_parse query', query);
     let params = params_query(query);
-    // console.log('store_url_check params', params);
+    // console.log('store_url_parse params', params);
     // settings encoded as json string, if present return true to avoid other settings init
     let a_str = params['a'];
     if (a_str) {
-      afound = url_a_restore(a_str);
+      uiSet = url_a_restore(a_str);
     }
     let u_str = params['u'];
     if (u_str) {
@@ -20,10 +28,10 @@ function store_url_check() {
     }
     let s_str = params['s'];
     if (s_str) {
-      console.log('store_url_check s_str', s_str);
+      console.log('store_url_parse s_str', s_str);
       let ent = a_settings.find((ent) => ent.setting === s_str);
-      a_settings_pending = ent;
-      console.log('store_url_check a_settings_pending', a_settings_pending);
+      settings = ent;
+      console.log('store_url_parse settings', settings);
       a_hideui = 1;
     }
     let h_str = params['h'];
@@ -35,26 +43,28 @@ function store_url_check() {
     let al_str = params['al'];
     if (al_str) {
       let url = './' + al_str;
-      loadJSON(url, (data) => {
-        console.log('al_str data', data);
-        a_settings_async = data;
+      loadJSON(url, (settings) => {
+        console.log('al_str settings', settings);
+        // a_settings_async = data;
+        urlResult({ uiSet, settings });
       });
+      return;
     }
   }
-  return afound;
+  urlResult({ uiSet, settings });
 }
 
 function url_a_restore(str) {
   // decode not Needed
   // str = decodeURIComponent(str);
   if (str) {
-    // console.log('store_url_check str');
+    // console.log('store_url_parse str');
     // console.log(str);
     let ui = JSON.parse(str);
     if (!ui) {
-      // console.log('store_url_check parse failed');
+      // console.log('store_url_parse parse failed');
     } else {
-      // console.log('store_url_check ui', ui);
+      // console.log('store_url_parse ui', ui);
       a_ui = ui;
       // Reflect url parameters in local storage
       for (prop in a_ui) {

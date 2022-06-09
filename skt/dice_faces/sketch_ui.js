@@ -121,7 +121,9 @@ function update_ui() {
   if (!a_ifps) {
     a_ifps = select('#ifps');
   }
-  a_ifps.html(' [fps=' + round(frameRate(), 2) + '] ');
+  if (a_ifps) {
+    a_ifps.html(' [fps=' + round(frameRate(), 2) + '] ');
+  }
 }
 
 function ui_message(msg) {

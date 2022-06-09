@@ -1,15 +1,17 @@
 // Restore a_ui settings from local storage
 // function ui_restore(isize) {
-function ui_restore() {
+function ui_restore(sizeResult) {
   ui_capture_init();
   ui_canvas_init();
   store_name_restore();
-  if (!store_url_check()) {
-    store_restore_ver();
-    store_restore_canvas_lock();
-    store_restore_a_ui();
-  }
-  return canvas_size_default();
+  store_url_parse((urlResult) => {
+    if (!urlResult.uiSet) {
+      store_restore_ver();
+      store_restore_canvas_lock();
+      store_restore_a_ui(urlResult.settings);
+    }
+    sizeResult(canvas_size_default());
+  });
 }
 
 function store_restore_canvas_lock() {
@@ -19,21 +21,22 @@ function store_restore_canvas_lock() {
   }
 }
 
-function store_restore_a_ui() {
+function store_restore_a_ui(settings) {
+  console.log('store_restore_a_ui settings', settings);
   // Force pads to be re-calculated
   a_ui.pads_count = 0;
   a_ui.pads_lock = 0;
-  if (a_settings_pending) {
-    store_restore_settings();
+  if (settings) {
+    store_restore_settings(settings);
   } else {
     store_restore_store_get();
   }
 }
 
-function store_restore_settings() {
-  a_ui = a_settings_pending;
-  let delay = 5000;
+function store_restore_settings(settings) {
+  a_ui = settings;
   if (a_hideui) {
+    let delay = 5000;
     setTimeout(ui_hide, delay);
   }
 }
