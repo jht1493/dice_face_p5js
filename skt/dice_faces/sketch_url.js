@@ -40,7 +40,7 @@ function store_url_parse(urlResult) {
     }
     // ?al=settings-sound/face-graph.json
     // ?al=settings-sound/face-posenet.json
-    let al_str = params['al'];
+    let al_str = params['al'] || params['d'];
     if (al_str) {
       let url = './' + al_str;
       loadJSON(url, (settings) => {
