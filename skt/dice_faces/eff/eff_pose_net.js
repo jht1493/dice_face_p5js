@@ -3,6 +3,7 @@ class eff_pose_net {
     alpha: [255, 230, 180, 100, 10],
     ndetect: [4, 1, 2, 3],
     figure_color: [0, 1],
+    stroke_weight: [0, 1, 2, 4, 8],
     _points: [0, 1],
     points_size: [10, 20, 30, 40],
     points_color_offset: [0, 1, 2, 3],
@@ -53,7 +54,7 @@ class eff_pose_net {
       image_copy(this.img, this.init_input);
     }
     // noFill();
-    strokeWeight(0);
+    strokeWeight(this.stroke_weight);
     let pad = this.isrc.pad;
     // let w = pad.width;
     let h = pad.height;
@@ -64,20 +65,22 @@ class eff_pose_net {
     for (let i = 0; i < poses.length; i++) {
       let pose = poses[i].pose;
 
-      let col;
+      let cols = dot_colors[i % dot_colors.length];
+      let colf;
       if (this.figure_color) {
         let x1 = pose.nose.x;
         let y1 = pose.nose.y;
         if (this.hflip) {
           x1 = this.img.width - x1;
         }
-        col = this.img.get(x1, y1);
+        colf = this.img.get(x1, y1);
       } else {
-        col = dot_colors[i % dot_colors.length];
+        colf = cols;
       }
-      col[3] = this.alpha;
-      stroke(col);
-      fill(col);
+      cols[3] = this.alpha;
+      colf[3] = this.alpha;
+      stroke(cols);
+      fill(colf);
 
       this.draw_pose(pose);
     }
@@ -169,7 +172,7 @@ class eff_pose_net {
     let y1 = elbow.y * r1 + py0;
     let hh = h / 2;
     y2 += hh;
-    circle(x2, y2, h);
+    // circle(x2, y2, h);
     let dx = x2 - x1;
     let dy = y2 - y1;
     let r = hh;
@@ -185,12 +188,14 @@ class eff_pose_net {
     let y6 = y1 + r * sin(a + HALF_PI);
     quad(x3, y3, x4, y4, x6, y6, x5, y5);
     this.draw_fore_limb(wrist, x1, y1, r);
+
+    circle(x2, y2, h);
   }
   draw_fore_limb(wrist, x1, y1, r) {
     let { px0, py0, r1 } = this;
     let x0 = wrist.x * r1 + px0;
     let y0 = wrist.y * r1 + py0;
-    circle(x1, y1, r * 2);
+    // circle(x1, y1, r * 2);
     let dx = x1 - x0;
     let dy = y1 - y0;
     let a = atan2(dy, dx);
@@ -203,8 +208,11 @@ class eff_pose_net {
     let x6 = x0 + r * cos(a + HALF_PI);
     let y6 = y0 + r * sin(a + HALF_PI);
     quad(x3, y3, x4, y4, x6, y6, x5, y5);
-    circle(x0, y0, r * 2);
+    // circle(x0, y0, r * 2);
     this.draw_hand_foot(x0, y0, r, a);
+
+    circle(x0, y0, r * 2);
+    circle(x1, y1, r * 2);
   }
   draw_hand_foot(x0, y0, r, a) {
     // r = r * 0.75;
