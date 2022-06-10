@@ -72,29 +72,6 @@ function store_restore_ver() {
   }
 }
 
-let a_effects_dict;
-
-function effect_label(label) {
-  if (!a_effects_dict) {
-    a_effects_dict = {};
-    let index = 0;
-    for (let eff of a_effects) {
-      a_effects_dict[eff.label] = eff;
-      eff.index = index;
-      index++;
-    }
-  }
-  if (!label) {
-    return a_effects[0];
-  }
-  let eff = a_effects_dict[label];
-  if (!eff) {
-    console.log('effect_label !!@ eff', label);
-    eff = a_effects[0];
-  }
-  return eff;
-}
-
 // Set a ui property that's stored into local storage
 function a_ui_set(prop, value) {
   a_ui[prop] = value;
