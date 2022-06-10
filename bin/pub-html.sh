@@ -38,5 +38,6 @@ scp "$source/../index.html" "$rdest/../../index.html"
 echo
 echo Lapse $(expr `date +%s` - $start_time) 
 echo "open https://jht1493.net/${homepage}"
+echo "open https://jht1493.net/d/dice_faces"
 
 

@@ -67,7 +67,7 @@ function reload_action() {
   // window.location = loc;
 }
 
-function resize_to_window() {
+function ui_present_window() {
   resizeCanvas(windowWidth, windowHeight);
   ui_hide();
   ui_window_refresh();
@@ -76,12 +76,7 @@ function resize_to_window() {
 function present_action() {
   toggleFullScreen();
   let delay = 3000;
-  // function func() {
-  //   resizeCanvas(windowWidth, windowHeight);
-  //   ui_hide();
-  //   ui_window_refresh();
-  // }
-  setTimeout(resize_to_window, delay);
+  setTimeout(ui_present_window, delay);
 }
 
 function ui_hide() {

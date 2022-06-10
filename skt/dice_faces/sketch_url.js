@@ -3,7 +3,7 @@
 //  a = gather settings from param itself
 //  u = store prefix
 //  s = settings name, also hide ui by default
-//  al = settings from json file
+//  al/d = settings from json file
 //  h = 0/1, explicit setting for hide ui
 //
 function store_url_parse(urlResult) {
@@ -38,13 +38,17 @@ function store_url_parse(urlResult) {
     if (h_str) {
       a_hideui = parseFloat(h_str);
     }
-    // ?al=settings-sound/face-graph.json
-    // ?al=settings-sound/face-posenet.json
-    let al_str = params['al'] || params['d'];
-    if (al_str) {
-      let url = './' + al_str;
+    let c_str = params['c'];
+    if (c_str) {
+      a_chat_name = c_str;
+    }
+    // ?d=settings-sound/face-graph.json
+    // ?d=settings-sound/face-posenet.json
+    let d_str = params['al'] || params['d'];
+    if (d_str) {
+      let url = './' + d_str;
       loadJSON(url, (settings) => {
-        console.log('al_str settings', settings);
+        console.log('d_str settings', settings);
         // a_settings_async = data;
         urlResult({ uiSet, settings });
       });

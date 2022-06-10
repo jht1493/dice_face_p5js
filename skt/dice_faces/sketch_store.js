@@ -31,13 +31,16 @@ function store_restore_a_ui(settings) {
   } else {
     store_restore_store_get();
   }
+  if (a_chat_name) {
+    a_ui.chat_name = a_chat_name;
+  }
 }
 
 function store_restore_settings(settings) {
   a_ui = settings;
   if (a_hideui) {
-    let delay = 5000;
-    setTimeout(ui_hide, delay);
+    let delay = 3000;
+    setTimeout(ui_present_window, delay);
   }
 }
 

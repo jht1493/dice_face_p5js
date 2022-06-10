@@ -16,6 +16,7 @@ class eff_tile {
         ent.previous_action(aPatch);
       },
     },
+    ifirst: [1, 2],
     _freeze_patch: [0, 1],
     livem_cycle: [0, 1],
     show_all: [1, 0],
@@ -28,6 +29,11 @@ class eff_tile {
   }
   render() {
     this.check_patches();
+    if (this.freeze_patch && this.wasFrozen) {
+      this.draw_freeze();
+    } else {
+      this.draw_frame();
+    }
     if (this.advancePending) {
       if (this.livem_cycle) {
         this.livem_step();
@@ -39,11 +45,6 @@ class eff_tile {
       this.advancePending = 0;
     }
     // console.log( 'this.wasFrozen', this.wasFrozen, 'advancePending', this.advancePending, 'got_freeze', this.got_freeze );
-    if (this.freeze_patch && this.wasFrozen) {
-      this.draw_freeze();
-    } else {
-      this.draw_frame();
-    }
     this.period_timer.check(() => {
       this.iperiod++;
       if (this.freeze_patch) {
@@ -63,10 +64,10 @@ class eff_tile {
     let uiPatch = a_ui.patches[ipatch];
     let imedia = uiPatch.isrc.imedia;
     if (imedia >= a_media_panes.length) {
-      imedia = 2;
+      imedia = this.ifirst;
     }
     imedia = (imedia + 1) % a_media_panes.length;
-    if (imedia < 2) imedia = 2;
+    if (imedia < this.ifirst) imedia = this.ifirst;
     if (imedia >= a_media_panes.length) imedia = uiPatch.isrc.imedia;
     let change = uiPatch.isrc.imedia !== imedia;
     if (change) {
@@ -83,7 +84,7 @@ class eff_tile {
       // 0 = Canvas
       // 1 = local camera
       // 2 = first livemedia source
-      let nsrc = a_media_panes.length - 2;
+      let nsrc = a_media_panes.length - this.ifirst;
       if (nsrc <= 1) {
         this.cells = [1, 1];
       } else if (nsrc <= 4) {
@@ -129,18 +130,19 @@ class eff_tile {
     if (imedia != uiPatch.isrc.imedia) {
       return;
     }
-    let more = 1;
+    let more = a_media_panes.length - this.ifirst;
     let input = this.input;
     let savex = this.x;
     let savey = this.y;
     let nimedia = imedia;
-    while (more) {
+    while (more > 0) {
       this.draw_single(input);
       nimedia = (nimedia + 1) % a_media_panes.length;
-      if (nimedia < 2 && a_media_panes.length > 2) nimedia = 2;
+      if (nimedia < this.ifirst) nimedia = this.ifirst;
       let media = a_media_panes[nimedia];
       input = media.capture;
-      more = nimedia != imedia;
+      //more = nimedia != imedia;
+      more--;
       this.draw_step();
       // console.log('draw_all more', more, 'nimedia', nimedia);
     }
