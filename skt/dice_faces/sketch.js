@@ -3,7 +3,7 @@ let my_canvas;
 p5.disableFriendlyErrors = true; // disables FES
 
 function setup() {
-  // pixelDensity(1);
+  // pixelDensity(1); // does not appear to affect live media
   // let sz = ui_restore();
   my_canvas = createCanvas(100, 100);
 

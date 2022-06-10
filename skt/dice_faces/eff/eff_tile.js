@@ -87,6 +87,8 @@ class eff_tile {
       let nsrc = a_media_panes.length - this.ifirst;
       if (nsrc <= 1) {
         this.cells = [1, 1];
+      } else if (nsrc <= 2) {
+        this.cells = [2, 1];
       } else if (nsrc <= 4) {
         this.cells = [2, 2];
       } else {
