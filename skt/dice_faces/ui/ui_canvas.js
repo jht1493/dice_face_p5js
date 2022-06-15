@@ -101,11 +101,6 @@ let a_canvas_sizes = [
     func: function () {
       toggleFullScreen();
       resizeCanvas(windowWidth, windowHeight);
-      // let delay = 5000;
-      // function func() {
-      //   resizeCanvas(windowWidth, windowHeight);
-      // }
-      // setTimeout(func, delay);
     },
   },
 ];
