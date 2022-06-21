@@ -9,6 +9,7 @@ let a_effects = [
   { label: 'loop', eff: eff_loop },
   { label: 'tile_clock', eff: eff_tile_clock },
   { label: 'tile', eff: eff_tile },
+  { label: 'circle', eff: eff_circle },
   { label: 'bestill', eff: eff_bestill },
   { label: 'bright', eff: eff_bright },
   { label: 'delaunay', eff: eff_delaunay },
