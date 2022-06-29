@@ -1,6 +1,22 @@
 _notes.txt
 
 # --
+2022-06-26 08:00:27
+
+https://github.com/processing/p5.js-web-editor/issues/753
+Git import/preview #753
+kylemcdonald opened this issue on Nov 5, 2018 · 5 comments
+
+https://github.com/processing/p5.js-web-editor/issues/1987
+Feature Request: Private Option for Sketches #1987
+golanlevin opened this issue on Dec 29, 2021 · 1 comment
+
+...The requested feature would allow an artist to work on a sketch away from the prying eyes of NFT thieves.
+
+
+https://github.com/golanlevin/circle-morphing
+
+# --
 2022-05-18 14:33:15
 
 https://editor.p5js.org/lisajamhoury/sketches/JMSVEKmx8
