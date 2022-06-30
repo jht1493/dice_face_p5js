@@ -44,6 +44,7 @@ function get_build_nums() {
   }
   build_num = parseFloat(str);
   nbuild_num = build_num + 1;
+  // nbuild_num = 1;
 }
 
 function build_num_run() {

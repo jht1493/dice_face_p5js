@@ -1,4 +1,4 @@
-let a_app_ver = 'c19?v=374 ';
+let a_app_ver = 'c19?v=1 ';
 let a_store_ver = '1';
 let a_store_name = 'StoreC19-A';
 let a_effects = [
