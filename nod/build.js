@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 // const axios = require('axios');
+const build_index = require('./build_index');
 
 // require('dotenv').config();
 // const user_name = process.env.USER_NAME || 'jht1493';
@@ -9,7 +10,10 @@ const path = require('path');
 // skt/dice_faces
 // skt/dice_faces/settings/2x2-20x15.json
 
+// Directory of sketches
 const skt_dir = '../skt';
+
+// source files that will have ?v=<buildnumber> updated
 const buildnum_files = [
   '../index.html',
   'index.html',
@@ -27,19 +31,23 @@ const skt_path = path.join(__dirname, skt_dir);
 
 const dicef_path = path.join(__dirname, skt_dir, 'dice_faces');
 
-//   let re = new RegExp('ab+c', 'g');
+let build_num;
+let nbuild_num;
 
-function build_num_run() {
+function get_build_nums() {
   const buildnum_path = path.join(skt_path, '..', '_build_num.txt');
   const str = fs.readFileSync(buildnum_path, 'utf8');
   if (!str) {
     console.log('read failed buildnum_path', buildnum_path);
     return;
   }
-  const buld_num = parseFloat(str);
-  const nbuld_num = buld_num + 1;
-  const from_str = '\\?v=' + buld_num;
-  const to_str = '?v=' + nbuld_num;
+  build_num = parseFloat(str);
+  nbuild_num = build_num + 1;
+}
+
+function build_num_run() {
+  const from_str = '\\?v=' + build_num;
+  const to_str = '?v=' + nbuild_num;
   const re = new RegExp(from_str, 'g');
   for (let afile of buildnum_files) {
     const fpath = path.join(skt_path, afile);
@@ -51,8 +59,8 @@ function build_num_run() {
     const nstr = str.replace(re, to_str);
     fs.writeFileSync(fpath, nstr);
   }
-  fs.writeFileSync(buildnum_path, nbuld_num + '');
-  console.log('nbuld_num', nbuld_num);
+  fs.writeFileSync(buildnum_path, nbuild_num + '');
+  console.log('nbuild_num', nbuild_num);
 }
 
 function build_webdb() {
@@ -149,8 +157,12 @@ function build_settings() {
   console.log('settings.length', settings.length);
 }
 
-build_webdb();
+get_build_nums();
 
-build_settings();
+// build_webdb();
 
-build_num_run();
+// build_settings();
+
+// build_num_run();
+
+build_index(dicef_path, nbuild_num);
