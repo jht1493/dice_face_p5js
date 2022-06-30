@@ -2,10 +2,6 @@ const fs = require('fs-extra');
 const path = require('path');
 
 function build_webdb(webdbPath, imagesOutPath) {
-  // assets/webdb/a-fema/212.jpg
-  // const webdbPath = path.join(__dirname, skt_dir, 'assets/webdb');
-  // const outPath = path.join(dicef_path, 'sk_images.js');
-
   let dirs = fs.readdirSync(webdbPath);
   dirs = dirs.filter((item) => item.substr(0, 1) !== '.');
   dirs.sort();
