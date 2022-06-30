@@ -33,7 +33,7 @@ const dice_faces_path = path.join(skt_path, 'dice_faces');
 const webdbPath = path.join(skt_path, 'assets/webdb');
 const imagesOutPath = path.join(dice_faces_path, 'src/let/a_images.js');
 
-build_webdb(webdbPath, imagesOutPath);
+// build_webdb(webdbPath, imagesOutPath);
 
 const settingsPath = path.join(dice_faces_path, 'settings/_menu');
 const settingsOutPath = path.join(dice_faces_path, 'src/let/a_settings.js');
