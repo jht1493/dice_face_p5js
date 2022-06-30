@@ -22,7 +22,7 @@ const buildnum_files = [
   'covid19_usa_recent/index.html',
   'covid19_usa_recent/sk_ui.js',
   'dice_faces/index.html',
-  'dice_faces/sk_ui.js',
+  'dice_faces/src/let/a_ui.js',
   'posenet/index.html',
   // 'dice_faces/sketch_check.js',
 ];
@@ -33,9 +33,10 @@ const dicef_path = path.join(__dirname, skt_dir, 'dice_faces');
 
 let build_num;
 let nbuild_num;
+let buildnum_path;
 
 function get_build_nums() {
-  const buildnum_path = path.join(skt_path, '..', '_build_num.txt');
+  buildnum_path = path.join(skt_path, '..', '_build_num.txt');
   const str = fs.readFileSync(buildnum_path, 'utf8');
   if (!str) {
     console.log('read failed buildnum_path', buildnum_path);
@@ -163,6 +164,6 @@ get_build_nums();
 
 // build_settings();
 
-// build_num_run();
+build_num_run();
 
 build_index(dicef_path, nbuild_num);

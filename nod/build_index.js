@@ -73,12 +73,16 @@ function build_index(index_root_path, nbuild_num) {
 
   let gstart = str.indexOf(genStart);
   let gend = str.indexOf(genEnd);
+  if (gstart < 0 || gend < 0) {
+    console.log('no generated_start/end', gstart, gend);
+    return;
+  }
 
-  str = str.substring(0, gstart) + incStr + str.substring(gend);
+  str = str.substring(0, gstart + genStart.length) + incStr + str.substring(gend);
 
   fs.writeFileSync(fpath, str);
 
-  console.log('str', str);
+  // console.log('str', str);
 }
 
 module.exports = build_index;
