@@ -15,16 +15,16 @@ const genStart = '<!-- @generated_start -->\n';
 const genEnd = '<!-- @generated_end -->\n';
 
 function build_index(index_root_path, nbuild_num) {
-  console.log('index_root_path', index_root_path, 'nbuild_num', nbuild_num);
+  // console.log('index_root_path', index_root_path, 'nbuild_num', nbuild_num);
   const fpath = path.join(index_root_path, 'index.html');
   let str = fs.readFileSync(fpath, 'utf8');
   if (!str) {
     console.log('read failed fpath', fpath);
+    return;
   }
-  console.log('str.length', str.length);
+  // console.log('str.length', str.length);
 
   // Find all include_src folder names
-
   let startIndex = 0;
   let dirs = [];
   for (;;) {
@@ -67,9 +67,6 @@ function build_index(index_root_path, nbuild_num) {
 
   // console.log('incFiles', incFiles);
   let incStr = incFiles.join('\n') + '\n';
-
-  // let regx = new RegExp(genStart + '(.*)' + genEnd, 'gm');
-  // str = str.replace(regx, incStr);
 
   let gstart = str.indexOf(genStart);
   let gend = str.indexOf(genEnd);
