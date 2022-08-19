@@ -32,7 +32,7 @@ echo "rsync from $source"
 echo "        to $rdest"
 rsync -razO$verbose $excludes $delete $test "$source/" "$rdest/"
 
-scp "$source/../index.html" "$rdest/../../index.html"
+# scp "$source/../index.html" "$rdest/../../index.html"
 
 
 echo
