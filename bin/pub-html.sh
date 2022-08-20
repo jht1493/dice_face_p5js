@@ -3,7 +3,9 @@ cd ${0%/*}
 
 # Publish html app to jht1493.net
 
-excludes="--exclude .DS_Store --exclude .git --exclude node_modules"
+# excludes="--exclude .DS_Store --exclude .git --exclude node_modules "
+excludes="--exclude .DS_Store --exclude .git --exclude node_modules --exclude skt/assets"
+
 delete=--delete
 test=
 # test=--dry-run
@@ -32,7 +34,7 @@ echo "rsync from $source"
 echo "        to $rdest"
 rsync -razO$verbose $excludes $delete $test "$source/" "$rdest/"
 
-scp "$source/../index.html" "$rdest/../../index.html"
+# scp "$source/../index.html" "$rdest/../../index.html"
 
 
 echo
