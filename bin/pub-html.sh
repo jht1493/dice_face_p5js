@@ -4,7 +4,7 @@ cd ${0%/*}
 # Publish html app to jht1493.net
 
 # excludes="--exclude .DS_Store --exclude .git --exclude node_modules "
-excludes="--exclude .DS_Store --exclude .git --exclude node_modules --exclude skt/assets"
+excludes="--exclude .DS_Store --exclude .git --exclude node_modules --exclude assets"
 
 delete=--delete
 test=
