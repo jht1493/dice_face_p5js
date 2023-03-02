@@ -21,8 +21,8 @@ function show_copyright() {
   let adiv = createDiv();
   adiv.style('font-size:24px');
   let title = createDiv('COVID-19 Memorial Ticker (preview)');
-  let copyr = createDiv('Copyright 2020-2022 John Henry Thompson & Shindy Johnson');
-  let adash = createA('https://epvisual.com/COVID-19-Impact/Dashboard/a0/', 'COVID-19-Impact Dashboard', '_blank');
+  let copyr = createDiv('Copyright 2020-Present John Henry Thompson & Shindy Johnson');
+  let adash = createA('https://jht1493.net/COVID-19-Impact/Dashboard/', 'COVID-19-Impact Dashboard', '_blank');
   // adiv.child([title, copyr, adash]);
   adiv.child(title);
   adiv.child(adash);
