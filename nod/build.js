@@ -13,8 +13,8 @@ const skt_dir = '../skt';
 const buildnum_files = [
   '../index.html',
   'index.html',
-  'covid19_heal_ticker/index.html',
-  'covid19_heal_ticker/sk_ui.js',
+  'covid19_heal_ticker-1/index.html',
+  'covid19_heal_ticker-1/sk_ui.js',
   'covid19_usa_recent/index.html',
   'covid19_usa_recent/sk_ui.js',
   'dice_faces/index.html',
