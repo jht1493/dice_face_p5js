@@ -36,7 +36,8 @@ function select_entry() {
     day_next++;
   } else {
     if (day_next == 1) {
-      panel_top = panel_top + dot_y + char_len + y_margin * 2;
+      // panel_top = panel_top + dot_y + char_len + y_margin * 2;
+      panel_top = panel_top + char_len;
       y_top = char_len * 3;
       // data_index_down = a_data.length;
       // a_data = sort_data();
